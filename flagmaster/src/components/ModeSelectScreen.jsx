@@ -28,7 +28,7 @@ export default function ModeSelectScreen({ onSelectMode, totalCountries }) {
             className="mode-btn"
             onClick={() => onSelectMode("flags")}
           >
-            <span className="mode-btn-icon">🏳</span>
+            <span className="mode-btn-icon">🇵🇱</span>
             <span className="mode-btn-text">
               <span className="mode-btn-label">Flag Quiz</span>
               <span className="mode-btn-sub">Identify country flags</span>
