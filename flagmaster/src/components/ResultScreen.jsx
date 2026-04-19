@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { getRating } from "../utils/quizHelpers";
 
 const BADGE_LABELS = {
@@ -6,12 +7,49 @@ const BADGE_LABELS = {
   miss: "Missed ✗",
 };
 
-export default function ResultScreen({ score, results, onPlayAgain }) {
+const CONFETTI_COLORS = ["#e63946", "#ffffff", "#f1c40f", "#2ecc71", "#3498db", "#9b59b6", "#e67e22"];
+
+function Confetti() {
+  const pieces = useMemo(
+    () =>
+      Array.from({ length: 120 }, (_, i) => ({
+        id: i,
+        color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+        left: `${Math.random() * 100}%`,
+        delay: `${Math.random() * 2.5}s`,
+        duration: `${2.5 + Math.random() * 2.5}s`,
+        size: `${6 + Math.random() * 8}px`,
+      })),
+    []
+  );
+
+  return (
+    <div className="confetti-container">
+      {pieces.map((p) => (
+        <div
+          key={p.id}
+          className="confetti-piece"
+          style={{
+            left: p.left,
+            width: p.size,
+            height: p.size,
+            backgroundColor: p.color,
+            animationDelay: p.delay,
+            animationDuration: p.duration,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+export default function ResultScreen({ score, results, onPlayAgain, mode }) {
   const rating = getRating(score);
   const displayScore = score % 1 === 0 ? score : score.toFixed(1);
 
   return (
     <div className="app-wrapper">
+      {mode === "flags" && score === 10 && <Confetti />}
       <div className="screen results-screen">
         <div className="results-card">
           <h2 className="results-title">Quiz Complete!</h2>

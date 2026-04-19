@@ -90,6 +90,7 @@ export default function App() {
         score={quiz.score}
         results={quiz.results}
         onPlayAgain={quiz.goHome}
+        mode={quiz.mode}
       />
     );
   }
