@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useQuiz } from "./hooks/useQuiz";
+import ContinentSelectScreen from "./components/ContinentSelectScreen";
 import ModeSelectScreen from "./components/ModeSelectScreen";
 import QuizScreen from "./components/QuizScreen";
 import ResultScreen from "./components/ResultScreen";
@@ -25,23 +26,23 @@ export default function App() {
     );
   }
 
-  if (quiz.error) {
+  if (quiz.screen === "home") {
     return (
-      <div className="error-screen">
-        <h2>Something went wrong</h2>
-        <p>Failed to load data: {quiz.error}</p>
-        <button className="btn-primary" onClick={quiz.retryFetch}>
-          Try Again
-        </button>
-      </div>
+      <ContinentSelectScreen
+        onSelectContinent={quiz.selectContinent}
+        countries={quiz.countries}
+      />
     );
   }
 
-  if (quiz.screen === "home") {
+  if (quiz.screen === "mode") {
+    const count = quiz.continent
+      ? quiz.countries.filter((c) => c.region === quiz.continent).length
+      : quiz.countries.length;
     return (
       <ModeSelectScreen
         onSelectMode={quiz.startQuiz}
-        totalCountries={quiz.countries.length}
+        totalCountries={count}
       />
     );
   }

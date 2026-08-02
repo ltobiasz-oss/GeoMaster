@@ -4,10 +4,11 @@ import { buildQuizQuestions, buildCapitalQuestions, getFeedbackMessage } from ".
 const TOTAL_QUESTIONS = 10;
 
 const initialState = {
-  screen: "home", // 'home' | 'quiz' | 'results'
+  screen: "home", // 'home' | 'mode' | 'quiz' | 'results'
   countries: [],
   loading: true,
   error: null,
+  continent: null, // null = all, or region string
   mode: null, // 'flags' | 'capitals'
   questions: [],
   currentIndex: 0,
@@ -58,12 +59,19 @@ export function useQuiz() {
     setState((s) => ({ ...s, error, loading: false }));
   }, []);
 
+  const selectContinent = useCallback((continent) => {
+    setState((s) => ({ ...s, continent, screen: "mode" }));
+  }, []);
+
   const startQuiz = useCallback((mode = "flags") => {
     setState((s) => {
+      const pool = s.continent
+        ? s.countries.filter((c) => c.region === s.continent)
+        : s.countries;
       const questions =
         mode === "capitals"
-          ? buildCapitalQuestions(s.countries)
-          : buildQuizQuestions(s.countries);
+          ? buildCapitalQuestions(pool)
+          : buildQuizQuestions(pool);
       return {
         ...s,
         screen: "quiz",
@@ -144,7 +152,7 @@ export function useQuiz() {
   }, []);
 
   const goHome = useCallback(() => {
-    setState((s) => ({ ...s, screen: "home", mode: null }));
+    setState((s) => ({ ...s, screen: "home", mode: null, continent: null }));
   }, []);
 
   const currentQuestion = state.questions[state.currentIndex] ?? null;
@@ -156,6 +164,7 @@ export function useQuiz() {
     totalQuestions: TOTAL_QUESTIONS,
     setCountries,
     setError,
+    selectContinent,
     startQuiz,
     selectAnswer,
     retryFetch,
