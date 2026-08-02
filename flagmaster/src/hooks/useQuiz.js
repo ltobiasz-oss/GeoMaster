@@ -33,7 +33,7 @@ export function useQuiz() {
     const timer = setTimeout(() => {
       setState((prev) => {
         const nextIndex = prev.currentIndex + 1;
-        if (nextIndex >= TOTAL_QUESTIONS) {
+        if (nextIndex >= prev.questions.length) {
           return { ...prev, screen: "results", transitionDelay: null };
         }
         return {

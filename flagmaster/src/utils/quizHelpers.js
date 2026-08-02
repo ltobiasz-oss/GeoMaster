@@ -88,12 +88,19 @@ export function buildQuizQuestions(allCountries) {
     (c) => !c.unMember || OTHER_REGIONS.has(c.region ?? "")
   );
 
-  const selected = [
+  let selected = [
     ...REGION_SLOTS.flatMap(({ region, count }) =>
       pickRandom(mainPool[region], count)
     ),
     ...pickRandom(otherPool, 1),
   ];
+
+  // Fill up to 10 when the regional distribution doesn't cover the whole pool
+  if (selected.length < 10) {
+    const usedSet = new Set(selected.map((c) => c.cca2));
+    const remaining = allCountries.filter((c) => !usedSet.has(c.cca2));
+    selected = [...selected, ...pickRandom(remaining, 10 - selected.length)];
+  }
 
   return shuffle(selected).map((correct) => {
     const wrong = generateWrongOptions(correct, allCountries);
@@ -125,12 +132,18 @@ export function buildCapitalQuestions(allCountries) {
     (c) => !c.unMember || OTHER_REGIONS.has(c.region ?? "")
   );
 
-  const selected = [
+  let selected = [
     ...REGION_SLOTS.flatMap(({ region, count }) =>
       pickRandom(mainPool[region], count)
     ),
     ...pickRandom(otherPool, 1),
   ];
+
+  if (selected.length < 10) {
+    const usedSet = new Set(selected.map((c) => c.cca2));
+    const remaining = withCapital.filter((c) => !usedSet.has(c.cca2));
+    selected = [...selected, ...pickRandom(remaining, 10 - selected.length)];
+  }
 
   return shuffle(selected).map((correct) => {
     const wrong = generateWrongOptions(correct, withCapital);
