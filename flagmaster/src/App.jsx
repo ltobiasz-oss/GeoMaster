@@ -3,37 +3,16 @@ import { useQuiz } from "./hooks/useQuiz";
 import ModeSelectScreen from "./components/ModeSelectScreen";
 import QuizScreen from "./components/QuizScreen";
 import ResultScreen from "./components/ResultScreen";
+import countriesData from "./data/countries.json";
 import "./styles/global.css";
-
-const API_URL =
-  "https://restcountries.com/v3.1/all?fields=name,flags,region,subregion,cca2,unMember,capital";
 
 export default function App() {
   const quiz = useQuiz();
 
   useEffect(() => {
     if (!quiz.loading) return;
-
-    let cancelled = false;
-
-    fetch(API_URL)
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((data) => {
-        if (!cancelled) {
-          const valid = data.filter((c) => c.flags?.svg && c.name?.common);
-          quiz.setCountries(valid);
-        }
-      })
-      .catch((err) => {
-        if (!cancelled) quiz.setError(err.message);
-      });
-
-    return () => {
-      cancelled = true;
-    };
+    const valid = countriesData.filter((c) => c.flags?.svg && c.name?.common);
+    quiz.setCountries(valid);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quiz.loading]);
 
