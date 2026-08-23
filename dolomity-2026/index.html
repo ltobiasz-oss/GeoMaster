@@ -118,29 +118,18 @@ section { padding: 64px 0; }
 .fact-card p { font-size: 0.9rem; color: var(--charcoal-soft); margin: 0; }
 @media (max-width: 900px) { .intro-grid { grid-template-columns: repeat(2, 1fr); gap: 26px 18px; } }
 
-/* ---------- STATUS ---------- */
-.status { background: var(--cream); border-bottom: 1px solid var(--line); }
-.status-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.status-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 22px; }
-.status-card .badge {
-  display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 700;
-  padding: 4px 11px; border-radius: 999px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.03em;
-}
-.badge.ok { background: rgba(60, 87, 68, 0.1); color: var(--forest); }
-.badge.warn { background: rgba(169, 121, 31, 0.14); color: var(--gold); }
-.status-card h3 { font-size: 1.05rem; }
-.status-card p { color: var(--charcoal-soft); font-size: 0.92rem; margin: 0; }
-.status-card a { font-weight: 600; }
 .status-note { margin-top: 22px; font-size: 0.86rem; color: var(--charcoal-soft); border-top: 1px solid var(--line); padding-top: 18px; }
-@media (max-width: 860px) { .status-grid { grid-template-columns: 1fr; } }
+.intro-lead-out { margin-top: 34px; font-size: 1.02rem; color: var(--charcoal); border-top: 1px solid var(--line); padding-top: 26px; }
 
 /* ---------- OPTION (editorial style) ---------- */
 .option { border-bottom: 1px solid var(--line); }
 .option-head { margin-bottom: 22px; }
 .option-head .tag {
   display: inline-flex; align-items: center; gap: 8px;
-  font-size: 0.78rem; font-weight: 700; color: var(--terracotta);
-  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;
+  font-size: 1.02rem; font-weight: 800; color: var(--white);
+  background: var(--forest);
+  text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 16px;
+  padding: 8px 16px; border-radius: 999px;
 }
 .option-head h2 { font-size: clamp(1.55rem, 3vw, 2.05rem); margin-bottom: 8px; }
 .option-head .subtitle { font-style: italic; color: var(--charcoal-soft); font-size: 1.02rem; max-width: 60ch; margin: 0; }
@@ -226,7 +215,6 @@ footer a:hover { text-decoration: underline; }
     <input type="checkbox" id="nav-toggle" class="nav-toggle">
     <label for="nav-toggle" class="nav-burger"><span></span><span></span><span></span></label>
     <div class="nav-links">
-      <a href="#status">Status na miejscu</a>
       <a href="#canazei">Canazei</a>
       <a href="#cortina">Cortina</a>
       <a href="#campiglio">Madonna di Campiglio</a>
@@ -237,7 +225,7 @@ footer a:hover { text-decoration: underline; }
 
 <header class="hero">
   <div class="hero-media">
-    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Passo_giau.jpg?width=1800" alt="Passo Giau, Dolomity" loading="eager"
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Via_ferrata_Ivano_Dibona_-_panoramio_%282%29.jpg?width=1800" alt="Via ferrata w Dolomitach" loading="eager"
          onerror="this.parentElement.style.background='linear-gradient(160deg,#3c5744,#221f1c)'; this.remove();">
   </div>
   <div class="hero-content">
@@ -273,37 +261,10 @@ footer a:hover { text-decoration: underline; }
       <div class="fact-card">
         <span class="icon">🧗</span>
         <h4>Realny poziom trudności</h4>
-        <p>Stopnie trudności via ferrat poniżej zostały zweryfikowane w niezależnych źródłach (ferrate365.it, planetmountain, outdooractive) — kilka pierwotnych ocen skorygowano.</p>
+        <p>Stopnie trudności via ferrat poniżej zweryfikowano w niezależnych źródłach (ferrate365.it, planetmountain, outdooractive). Zakres to A–D: Canazei i Cortina zawierają po jednej ferracie na poziomie D (Cesare Piazzetta) lub C/D (Giovanni Lipella); Madonna di Campiglio zatrzymuje się na C, z opcjonalnym D/E do wyboru na Ferracie dell'Aquila.</p>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="status" id="status">
-  <div class="container">
-    <div class="section-head">
-      <span class="kicker">Sprawdzone na 22.08.2026</span>
-      <h2>Co faktycznie będzie otwarte w te cztery dni</h2>
-      <p>Zamiast zakładać — sprawdziliśmy. Oto realny stan rifugiów, kolejek linowych i przełęczy na połowę października.</p>
-    </div>
-    <div class="status-grid">
-      <div class="status-card">
-        <span class="badge ok">Potwierdzone</span>
-        <h3>Schroniska (rifugia)</h3>
-        <p>Sezon w wysokich partiach kończy się tradycyjnie ok. 20 września, a zdecydowana większość rifugiów zamyka się między końcem września a połową października. Założenie „95% zamkniętych" jest realistyczne — plan hotelowy w dolinie to jedyna sensowna opcja.</p>
-      </div>
-      <div class="status-card">
-        <span class="badge ok">Dobra wiadomość</span>
-        <h3>Kolejka Lagazuoi (Passo Falzarego)</h3>
-        <p>Sezon 2026 kolejki linowej Falzarego–Lagazuoi trwa do <strong>18 października</strong> — praktycznie przez cały czas trwania wyprawy. Dzień 1 wariantu Cortina jest bezpieczny logistycznie.<br><a href="https://lagazuoi.it/EN/Information-Prices-and-useful-information-page20-Lagazuoi-cable-car" target="_blank" rel="noopener">Aktualne godziny na lagazuoi.it →</a></p>
-      </div>
-      <div class="status-card">
-        <span class="badge warn">Do monitorowania</span>
-        <h3>Przełęcze (Sella, Pordoi, Giau, Falzarego)</h3>
-        <p>Przełęcze nie mają sztywnej daty zamknięcia zimowego — zależą wyłącznie od pogody i mogą zostać zamknięte z dnia na dzień po pierwszym większym opadzie śniegu.<br><a href="https://www.alto-adige.com/traffico/montagna-passi-di-montagna" target="_blank" rel="noopener">Status na żywo: alto-adige.com →</a></p>
-      </div>
-    </div>
-    <p class="status-note">Rekomendacja: sprawdzić status przełęczy i kolejek ponownie na 5–7 dni przed wylotem oraz mieć w zanadrzu dzień zapasowy niżej w dolinie na wypadek nagłego załamania pogody.</p>
+    <p class="intro-lead-out">Poniżej znajdziecie trzy zweryfikowane propozycje wyprawy do wyboru — wybierzcie wariant najlepiej dopasowany do Waszych priorytetów.</p>
   </div>
 </section>
 
@@ -330,8 +291,8 @@ footer a:hover { text-decoration: underline; }
         <figcaption>Passo Pordoi, start Ferraty Piazzetta<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
       </figure>
       <figure class="photo">
-        <div class="frame"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Gipfelstimmung_auf_dem_Piz_Bo%C3%A8.jpg?width=700" alt="Szczyt Piz Boè" onerror="this.closest('.photo').classList.add('img-fallback');"></div>
-        <figcaption>Piz Boè, 3152 m n.p.m.<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
+        <div class="frame"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Passo_Sella_-_Citt%C3%A0_dei_Sassi_-_Sella_-_Marmolada.jpg?width=700" alt="Passo Sella, Città dei Sassi" onerror="this.closest('.photo').classList.add('img-fallback');"></div>
+        <figcaption>Passo Sella, „Città dei Sassi"<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
       </figure>
     </div>
 
@@ -381,8 +342,8 @@ footer a:hover { text-decoration: underline; }
         <figcaption>Tofana di Rozes widziana z Lagazuoi<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
       </figure>
       <figure class="photo">
-        <div class="frame"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Via_ferrata_Ivano_Dibona_-_panoramio_%282%29.jpg?width=700" alt="Via ferrata w okolicy Rifugio Dibona" onerror="this.closest('.photo').classList.add('img-fallback');"></div>
-        <figcaption>Via ferrata w rejonie Rifugio Dibona<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
+        <div class="frame"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Dai_piedi_della_Tofana_%2Cveduta_della_Marmolada_parete_nord_-_panoramio.jpg?width=700" alt="Widok spod Tofany na Marmoladę" onerror="this.closest('.photo').classList.add('img-fallback');"></div>
+        <figcaption>Ściana Tofany, teren Ferraty Lipella<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
       </figure>
       <figure class="photo">
         <div class="frame"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Rifugio_Averau.JPG?width=700" alt="Rifugio Averau" onerror="this.closest('.photo').classList.add('img-fallback');"></div>
@@ -436,8 +397,8 @@ footer a:hover { text-decoration: underline; }
         <figcaption>Masyw Dolomitów Brenta<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
       </figure>
       <figure class="photo">
-        <div class="frame"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Madonna_di_campiglio.jpg?width=700" alt="Madonna di Campiglio" onerror="this.closest('.photo').classList.add('img-fallback');"></div>
-        <figcaption>Madonna di Campiglio, baza wyprawy<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
+        <div class="frame"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Cascate_di_Vallesinella_alte_-_Sentiero_01.jpg?width=700" alt="Szlak w Vallesinelli" onerror="this.closest('.photo').classList.add('img-fallback');"></div>
+        <figcaption>Sentiero w Vallesinelli, dzień 2<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
       </figure>
       <figure class="photo">
         <div class="frame"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Between_Cime_Paganela_and_Fai_della_Paganella_-_View_to_fhe_Val_d%27Adige_-_panoramio.jpg?width=700" alt="Widok z Paganelli" onerror="this.closest('.photo').classList.add('img-fallback');"></div>
