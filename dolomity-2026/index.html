@@ -145,8 +145,11 @@ figure.photo .frame {
   background: linear-gradient(150deg, var(--forest), var(--charcoal));
 }
 figure.photo img { width: 100%; height: 100%; object-fit: cover; }
-figure.photo .frame.illus { display: flex; align-items: center; justify-content: center; }
-figure.photo .frame.illus svg { width: 42%; height: 42%; color: var(--gold); opacity: 0.9; }
+figure.photo.img-fallback .frame img { display: none; }
+figure.photo.img-fallback .frame::after {
+  content: "⛰"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; color: rgba(255,255,255,0.45);
+}
 figcaption { margin-top: 8px; font-size: 0.82rem; color: var(--charcoal); }
 figcaption .credit { display: block; font-size: 0.75rem; color: var(--stone, #928d80); margin-top: 1px; }
 @media (max-width: 760px) { .photo-row { grid-template-columns: 1fr 1fr; } figure.photo:first-child { grid-column: span 2; } }
@@ -280,16 +283,16 @@ footer a:hover { text-decoration: underline; }
 
     <div class="photo-row">
       <figure class="photo">
-        <div class="frame illus"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,54 20,34 34,46 48,18 58,10"/><circle cx="20" cy="34" r="2.6" fill="currentColor" stroke="none"/><circle cx="34" cy="46" r="2.6" fill="currentColor" stroke="none"/><circle cx="48" cy="18" r="2.6" fill="currentColor" stroke="none"/></svg></div>
-        <figcaption>Passo Sella — Via Ferrata Col Rodella</figcaption>
+        <div class="frame"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Sassolungo_dall'Alpe_di_Siusi.jpg?width=900" alt="Sassolungo widziany znad Alpe di Siusi" onerror="this.closest('.photo').classList.add('img-fallback');"></div>
+        <figcaption>Sassolungo i grupa Sella<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
       </figure>
       <figure class="photo">
-        <div class="frame illus"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,54 20,34 34,46 48,18 58,10"/><circle cx="20" cy="34" r="2.6" fill="currentColor" stroke="none"/><circle cx="34" cy="46" r="2.6" fill="currentColor" stroke="none"/><circle cx="48" cy="18" r="2.6" fill="currentColor" stroke="none"/></svg></div>
-        <figcaption>Vigo di Fassa — Via Ferrata del Masarè</figcaption>
+        <div class="frame"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Passo_pordoi.jpg?width=700" alt="Passo Pordoi" onerror="this.closest('.photo').classList.add('img-fallback');"></div>
+        <figcaption>Passo Pordoi, start Ferraty Piazzetta<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
       </figure>
       <figure class="photo">
-        <div class="frame illus"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"><path d="M4 50 L22 22 L30 34 L40 16 L60 50 Z"/></svg></div>
-        <figcaption>Piz Boè — Via Ferrata Cesare Piazzetta</figcaption>
+        <div class="frame"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Passo_Sella_-_Citt%C3%A0_dei_Sassi_-_Sella_-_Marmolada.jpg?width=700" alt="Passo Sella, Città dei Sassi" onerror="this.closest('.photo').classList.add('img-fallback');"></div>
+        <figcaption>Passo Sella, „Città dei Sassi"<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
       </figure>
     </div>
 
@@ -335,16 +338,16 @@ footer a:hover { text-decoration: underline; }
 
     <div class="photo-row">
       <figure class="photo">
-        <div class="frame illus"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M10 54 V32 A22 22 0 0 1 54 32 V54"/></svg></div>
-        <figcaption>Passo Falzarego — Tunele Lagazuoi</figcaption>
+        <div class="frame"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Panoramica_dal_Lagazuoi%28Tofana_di_Rozes%29.JPG?width=900" alt="Widok na Tofana di Rozes z Lagazuoi" onerror="this.closest('.photo').classList.add('img-fallback');"></div>
+        <figcaption>Tofana di Rozes widziana z Lagazuoi<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
       </figure>
       <figure class="photo">
-        <div class="frame illus"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,54 20,34 34,46 48,18 58,10"/><circle cx="20" cy="34" r="2.6" fill="currentColor" stroke="none"/><circle cx="34" cy="46" r="2.6" fill="currentColor" stroke="none"/><circle cx="48" cy="18" r="2.6" fill="currentColor" stroke="none"/></svg></div>
-        <figcaption>Tofana di Rozes — Via Ferrata Giovanni Lipella</figcaption>
+        <div class="frame"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Dai_piedi_della_Tofana_%2Cveduta_della_Marmolada_parete_nord_-_panoramio.jpg?width=700" alt="Widok spod Tofany na Marmoladę" onerror="this.closest('.photo').classList.add('img-fallback');"></div>
+        <figcaption>Ściana Tofany, teren Ferraty Lipella<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
       </figure>
       <figure class="photo">
-        <div class="frame illus"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"><path d="M12 34 L32 14 L52 34"/><path d="M18 34 V50 H46 V34"/><rect x="28" y="38" width="8" height="12" fill="currentColor" stroke="none"/></svg></div>
-        <figcaption>Nuvolau — Rifugio Averau</figcaption>
+        <div class="frame"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Rifugio_Averau.JPG?width=700" alt="Rifugio Averau" onerror="this.closest('.photo').classList.add('img-fallback');"></div>
+        <figcaption>Rifugio Averau, u stóp Nuvolau<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
       </figure>
     </div>
 
@@ -390,16 +393,16 @@ footer a:hover { text-decoration: underline; }
 
     <div class="photo-row">
       <figure class="photo">
-        <div class="frame illus"><svg viewBox="0 0 64 64" fill="currentColor" stroke="none"><path d="M32 8 L21 28 H27 L17 44 H47 L37 28 H43 Z"/><rect x="29" y="44" width="6" height="10"/></svg></div>
-        <figcaption>Val Ambiez — trekking, dzień 1</figcaption>
+        <div class="frame"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Dolomiti_di_Brenta.jpg?width=900" alt="Dolomity Brenta" onerror="this.closest('.photo').classList.add('img-fallback');"></div>
+        <figcaption>Masyw Dolomitów Brenta<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
       </figure>
       <figure class="photo">
-        <div class="frame illus"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,54 20,34 34,46 48,18 58,10"/><circle cx="20" cy="34" r="2.6" fill="currentColor" stroke="none"/><circle cx="34" cy="46" r="2.6" fill="currentColor" stroke="none"/><circle cx="48" cy="18" r="2.6" fill="currentColor" stroke="none"/></svg></div>
-        <figcaption>Vallesinella — Via Ferrata Ettore Castiglioni</figcaption>
+        <div class="frame"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Cascate_di_Vallesinella_alte_-_Sentiero_01.jpg?width=700" alt="Szlak w Vallesinelli" onerror="this.closest('.photo').classList.add('img-fallback');"></div>
+        <figcaption>Sentiero w Vallesinelli, dzień 2<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
       </figure>
       <figure class="photo">
-        <div class="frame illus"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"><path d="M4 50 L22 22 L30 34 L40 16 L60 50 Z"/></svg></div>
-        <figcaption>Paganella — Via Ferrata dell'Aquila</figcaption>
+        <div class="frame"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Between_Cime_Paganela_and_Fai_della_Paganella_-_View_to_fhe_Val_d%27Adige_-_panoramio.jpg?width=700" alt="Widok z Paganelli" onerror="this.closest('.photo').classList.add('img-fallback');"></div>
+        <figcaption>Paganella, cel dnia 3<span class="credit">Źródło: Wikimedia Commons</span></figcaption>
       </figure>
     </div>
 
