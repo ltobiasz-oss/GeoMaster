@@ -198,6 +198,32 @@ tbody td strong { color: var(--charcoal); }
 .corrected { color: var(--gold); font-weight: 700; }
 .corrected::after { content: " ✓"; }
 
+/* ---------- WEATHER ---------- */
+.weather { background: var(--cream); }
+.weather-region { margin-bottom: 44px; }
+.weather-region:last-child { margin-bottom: 0; }
+.weather-region h3 { font-size: 1.2rem; margin-bottom: 16px; }
+.weather-block { margin-bottom: 22px; }
+.weather-block:last-child { margin-bottom: 0; }
+.weather-block h4 { font-size: 0.95rem; font-weight: 700; color: var(--forest); margin-bottom: 10px; }
+.weather-table table { min-width: 640px; background: var(--white); }
+.weather-table td.risk { color: var(--terracotta); font-weight: 700; }
+.weather-legend {
+  margin: 0 0 30px; padding: 16px 20px; background: var(--white); border: 1px solid var(--line);
+  border-radius: var(--radius); font-size: 0.86rem; color: var(--charcoal-soft); max-width: 720px;
+}
+.weather-legend strong { color: var(--charcoal); }
+.weather-legend .risk { color: var(--terracotta); font-weight: 700; }
+.weather-conclusions {
+  margin-top: 40px; padding: 22px 24px; background: var(--white); border-radius: var(--radius);
+  border: 1px solid var(--line); max-width: 780px;
+}
+.weather-conclusions h3 { font-size: 1.05rem; margin-bottom: 12px; }
+.weather-conclusions ul { margin: 0; padding: 0 0 0 20px; }
+.weather-conclusions li { margin-bottom: 8px; font-size: 0.94rem; }
+.weather-conclusions li:last-child { margin-bottom: 0; }
+.weather-caveat { margin-top: 22px; font-size: 0.84rem; color: var(--charcoal-soft); border-top: 1px solid var(--line); padding-top: 16px; max-width: 780px; }
+
 /* ---------- FOOTER ---------- */
 footer { background: var(--cream); color: var(--charcoal-soft); padding: 40px 0 36px; border-top: 1px solid var(--line); }
 .footer-grid { display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap; font-size: 0.86rem; }
@@ -219,6 +245,7 @@ footer a:hover { text-decoration: underline; }
       <a href="#cortina">Cortina</a>
       <a href="#campiglio">Madonna di Campiglio</a>
       <a href="#porownanie">Porównanie</a>
+      <a href="#pogoda">Pogoda</a>
     </div>
   </div>
 </nav>
@@ -481,6 +508,489 @@ footer a:hover { text-decoration: underline; }
       </table>
     </div>
     <p class="status-note">Dystanse dzień-po-dniu zostały przeliczone tak, by sumowały się do wartości w tabeli (pierwotne sumy różniły się od rozpisek dziennych o 30–90 km). Trudności ferrat porównano z ferrate365.it, planetmountain.com, outdooractive.com i ferrataguide.com.</p>
+  </div>
+</section>
+
+<!-- ============ WEATHER ============ -->
+<section class="weather" id="pogoda">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Analiza historyczna · dane pobrane 02.09.2026</span>
+      <h2>Pogoda: co pokazuje 10 lat danych dla 15–20 października</h2>
+      <p>Dla każdego wariantu dwa punkty: baza w dolinie oraz sąsiadująca przełęcz/aktywność na wysokości. Wartości to średnie z 10 lat (2016–2025) dla tego samego dnia kalendarzowego.</p>
+    </div>
+
+    <div class="weather-legend">
+      <strong>Legenda:</strong> pogrubione, <span class="risk">pomarańczowe</span> wartości oznaczają podwyższone ryzyko — średnie minimum dobowe ≤0°C (możliwy szron/lód na skałach rano) lub śnieg w &gt;30% analizowanych lat dla danego dnia. „% dni opad &gt;1mm” liczone jest jako odsetek lat, w których danego dnia spadło więcej niż 1 mm opadu (mniej podatne na wypaczenie przez jeden ekstremalny rok niż suma mm). „Śnieg śr.” to orientacyjna grubość liczona wyłącznie z lat, w których śnieg faktycznie wystąpił.
+    </div>
+
+    <div class="weather-region">
+      <h3>Canazei — Val di Fassa</h3>
+      <div class="weather-block" id="w-canazei-dolina">
+        <h4>Canazei (dolina, ~1465 m)</h4>
+        <div class="table-wrap weather-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Tmax śr.</th>
+                <th>Tmin śr.</th>
+                <th>% dni opad &gt;1mm</th>
+                <th>% dni śnieg</th>
+                <th>Śnieg śr. (dni ze śniegiem)</th>
+                <th>Wiatr śr.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>15.10</strong></td>
+                <td>12.3°C</td>
+                <td>2.8°C</td>
+                <td>40%</td>
+                <td>10%</td>
+                <td>5.7 cm</td>
+                <td>7.0 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>16.10</strong></td>
+                <td>12.4°C</td>
+                <td>2.8°C</td>
+                <td>30%</td>
+                <td>10%</td>
+                <td>1.3 cm</td>
+                <td>6.9 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>17.10</strong></td>
+                <td>12.4°C</td>
+                <td>1.9°C</td>
+                <td>10%</td>
+                <td>0%</td>
+                <td>0.0 cm</td>
+                <td>6.4 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>18.10</strong></td>
+                <td>12.2°C</td>
+                <td>2.6°C</td>
+                <td>20%</td>
+                <td>0%</td>
+                <td>0.0 cm</td>
+                <td>6.1 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>19.10</strong></td>
+                <td>11.5°C</td>
+                <td>3.4°C</td>
+                <td>30%</td>
+                <td>10%</td>
+                <td>0.2 cm</td>
+                <td>5.4 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>20.10</strong></td>
+                <td>11.9°C</td>
+                <td>4.1°C</td>
+                <td>20%</td>
+                <td>10%</td>
+                <td>3.7 cm</td>
+                <td>8.2 km/h</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="weather-block" id="w-canazei-pordoi">
+        <h4>Canazei (przełęcz Passo Pordoi, ~2239 m)</h4>
+        <div class="table-wrap weather-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Tmax śr.</th>
+                <th>Tmin śr.</th>
+                <th>% dni opad &gt;1mm</th>
+                <th>% dni śnieg</th>
+                <th>Śnieg śr. (dni ze śniegiem)</th>
+                <th>Wiatr śr.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>15.10</strong></td>
+                <td>7.2°C</td>
+                <td class="risk">-0.6°C</td>
+                <td>30%</td>
+                <td>10%</td>
+                <td>8.1 cm</td>
+                <td>8.1 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>16.10</strong></td>
+                <td>7.8°C</td>
+                <td class="risk">-1.1°C</td>
+                <td>20%</td>
+                <td>20%</td>
+                <td>0.5 cm</td>
+                <td>7.3 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>17.10</strong></td>
+                <td>7.5°C</td>
+                <td class="risk">-0.9°C</td>
+                <td>10%</td>
+                <td>0%</td>
+                <td>0.0 cm</td>
+                <td>6.6 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>18.10</strong></td>
+                <td>7.3°C</td>
+                <td>0.3°C</td>
+                <td>30%</td>
+                <td>0%</td>
+                <td>0.0 cm</td>
+                <td>7.5 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>19.10</strong></td>
+                <td>6.7°C</td>
+                <td>0.1°C</td>
+                <td>40%</td>
+                <td>10%</td>
+                <td>0.2 cm</td>
+                <td>7.3 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>20.10</strong></td>
+                <td>7.3°C</td>
+                <td>0.3°C</td>
+                <td>40%</td>
+                <td>20%</td>
+                <td>2.0 cm</td>
+                <td>9.5 km/h</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="weather-region">
+      <h3>Cortina d'Ampezzo</h3>
+      <div class="weather-block" id="w-cortina-dolina">
+        <h4>Cortina d'Ampezzo (dolina, ~1224 m)</h4>
+        <div class="table-wrap weather-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Tmax śr.</th>
+                <th>Tmin śr.</th>
+                <th>% dni opad &gt;1mm</th>
+                <th>% dni śnieg</th>
+                <th>Śnieg śr. (dni ze śniegiem)</th>
+                <th>Wiatr śr.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>15.10</strong></td>
+                <td>13.3°C</td>
+                <td>4.4°C</td>
+                <td>50%</td>
+                <td>10%</td>
+                <td>10.4 cm</td>
+                <td>8.6 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>16.10</strong></td>
+                <td>13.8°C</td>
+                <td>4.8°C</td>
+                <td>30%</td>
+                <td>10%</td>
+                <td>0.8 cm</td>
+                <td>7.4 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>17.10</strong></td>
+                <td>13.6°C</td>
+                <td>4.5°C</td>
+                <td>20%</td>
+                <td>0%</td>
+                <td>0.0 cm</td>
+                <td>7.1 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>18.10</strong></td>
+                <td>13.6°C</td>
+                <td>4.1°C</td>
+                <td>30%</td>
+                <td>0%</td>
+                <td>0.0 cm</td>
+                <td>7.0 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>19.10</strong></td>
+                <td>12.9°C</td>
+                <td>5.5°C</td>
+                <td>50%</td>
+                <td>10%</td>
+                <td>0.2 cm</td>
+                <td>7.0 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>20.10</strong></td>
+                <td>13.2°C</td>
+                <td>5.6°C</td>
+                <td>50%</td>
+                <td>10%</td>
+                <td>10.9 cm</td>
+                <td>8.8 km/h</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="weather-block" id="w-cortina-giau">
+        <h4>Cortina d'Ampezzo (przełęcz Passo Giau, ~2233 m)</h4>
+        <div class="table-wrap weather-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Tmax śr.</th>
+                <th>Tmin śr.</th>
+                <th>% dni opad &gt;1mm</th>
+                <th>% dni śnieg</th>
+                <th>Śnieg śr. (dni ze śniegiem)</th>
+                <th>Wiatr śr.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>15.10</strong></td>
+                <td>7.4°C</td>
+                <td>0.5°C</td>
+                <td>40%</td>
+                <td>10%</td>
+                <td>9.7 cm</td>
+                <td>9.3 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>16.10</strong></td>
+                <td>7.9°C</td>
+                <td class="risk">-0.0°C</td>
+                <td>30%</td>
+                <td>20%</td>
+                <td>0.5 cm</td>
+                <td>7.8 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>17.10</strong></td>
+                <td>7.8°C</td>
+                <td>0.2°C</td>
+                <td>30%</td>
+                <td>0%</td>
+                <td>0.0 cm</td>
+                <td>7.2 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>18.10</strong></td>
+                <td>7.5°C</td>
+                <td>1.1°C</td>
+                <td>30%</td>
+                <td>0%</td>
+                <td>0.0 cm</td>
+                <td>6.8 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>19.10</strong></td>
+                <td>7.0°C</td>
+                <td>1.5°C</td>
+                <td>50%</td>
+                <td>10%</td>
+                <td>0.5 cm</td>
+                <td>7.4 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>20.10</strong></td>
+                <td>7.5°C</td>
+                <td>1.2°C</td>
+                <td>50%</td>
+                <td>20%</td>
+                <td>5.1 cm</td>
+                <td>9.8 km/h</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="weather-region">
+      <h3>Madonna di Campiglio — Dolomity Brenta</h3>
+      <div class="weather-block" id="w-madonna-dolina">
+        <h4>Madonna di Campiglio (dolina, ~1550 m)</h4>
+        <div class="table-wrap weather-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Tmax śr.</th>
+                <th>Tmin śr.</th>
+                <th>% dni opad &gt;1mm</th>
+                <th>% dni śnieg</th>
+                <th>Śnieg śr. (dni ze śniegiem)</th>
+                <th>Wiatr śr.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>15.10</strong></td>
+                <td>10.9°C</td>
+                <td>2.2°C</td>
+                <td>40%</td>
+                <td>10%</td>
+                <td>8.7 cm</td>
+                <td>5.5 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>16.10</strong></td>
+                <td>11.1°C</td>
+                <td>1.9°C</td>
+                <td>50%</td>
+                <td>10%</td>
+                <td>1.4 cm</td>
+                <td>5.7 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>17.10</strong></td>
+                <td>10.8°C</td>
+                <td>0.6°C</td>
+                <td>10%</td>
+                <td>0%</td>
+                <td>0.0 cm</td>
+                <td>5.4 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>18.10</strong></td>
+                <td>11.0°C</td>
+                <td>0.3°C</td>
+                <td>30%</td>
+                <td>0%</td>
+                <td>0.0 cm</td>
+                <td>5.6 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>19.10</strong></td>
+                <td>10.1°C</td>
+                <td>2.3°C</td>
+                <td>60%</td>
+                <td>10%</td>
+                <td>0.3 cm</td>
+                <td>5.9 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>20.10</strong></td>
+                <td>10.5°C</td>
+                <td>3.7°C</td>
+                <td>50%</td>
+                <td>10%</td>
+                <td>1.4 cm</td>
+                <td>6.6 km/h</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="weather-block" id="w-madonna-paganella">
+        <h4>Madonna di Campiglio (przełęcz Paganella, ~2125 m)</h4>
+        <div class="table-wrap weather-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Tmax śr.</th>
+                <th>Tmin śr.</th>
+                <th>% dni opad &gt;1mm</th>
+                <th>% dni śnieg</th>
+                <th>Śnieg śr. (dni ze śniegiem)</th>
+                <th>Wiatr śr.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>15.10</strong></td>
+                <td>9.1°C</td>
+                <td>2.2°C</td>
+                <td>60%</td>
+                <td>10%</td>
+                <td>9.4 cm</td>
+                <td>5.6 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>16.10</strong></td>
+                <td>9.1°C</td>
+                <td>2.2°C</td>
+                <td>30%</td>
+                <td>10%</td>
+                <td>1.6 cm</td>
+                <td>5.8 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>17.10</strong></td>
+                <td>8.9°C</td>
+                <td>0.8°C</td>
+                <td>10%</td>
+                <td>0%</td>
+                <td>0.0 cm</td>
+                <td>5.6 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>18.10</strong></td>
+                <td>9.1°C</td>
+                <td>0.4°C</td>
+                <td>30%</td>
+                <td>0%</td>
+                <td>0.0 cm</td>
+                <td>5.5 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>19.10</strong></td>
+                <td>8.2°C</td>
+                <td>2.3°C</td>
+                <td>60%</td>
+                <td>0%</td>
+                <td>0.0 cm</td>
+                <td>6.5 km/h</td>
+              </tr>
+              <tr>
+                <td><strong>20.10</strong></td>
+                <td>8.5°C</td>
+                <td>3.1°C</td>
+                <td>60%</td>
+                <td>10%</td>
+                <td>0.8 cm</td>
+                <td>7.5 km/h</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="weather-conclusions">
+      <h3>Wnioski</h3>
+      <ul>
+        <li><strong>Przełęcze (Passo Pordoi, Passo Giau, częściowo Paganella)</strong> mają średnie minimum blisko lub poniżej 0°C, zwłaszcza 15–17.10 — realne ryzyko szronu/lodu na ferratach rano niezależnie od wybranego wariantu. Start później w ciągu dnia ogranicza to ryzyko.</li>
+        <li><strong>17–18.10 wypada statystycznie najsuchszy i najbardziej stabilny</strong> we wszystkich trzech regionach — 0% lat ze śniegiem i najniższy odsetek dni z opadem. Dobry moment na najtrudniejszą ferratę wyprawy.</li>
+        <li><strong>15.10 oraz 19–20.10 są bardziej ryzykowne opadowo</strong> (wyższy % lat z opadem, w części lat już pierwszy śnieg) — warto zostawić tam elastyczność planu (trekking zamiast ferraty w razie pogorszenia pogody).</li>
+        <li><strong>Cortina d'Ampezzo wypada najcieplej</strong> ze wszystkich wariantów (Tmax ~13–14°C w dolinie, dodatnie minimum nawet na Passo Giau w większości dni) — najbardziej komfortowy wariant termicznie.</li>
+        <li><strong>Canazei i Madonna di Campiglio są zbliżone termicznie</strong>, z Madonną nieznacznie chłodniejszą i suchszą w połowie okna (17–18.10).</li>
+      </ul>
+      <div class="weather-caveat">
+        <strong>Źródło i zastrzeżenia:</strong> dane historyczne z <a href="https://open-meteo.com/en/docs/historical-weather-api" target="_blank" rel="noopener">Open-Meteo Historical Weather API</a> (reanaliza ERA5), pobrane 02.09.2026 dla okresu 15–20 października z lat 2016–2025 (10 obserwacji na dzień). To dane modelowe, nie odczyty ze stacji naziemnych — dokładność w rzeźbie terenu górskiego jest ograniczona rozdzielczością siatki modelu (punkt modelowy bywa przesunięty względem współrzędnych o kilkanaście km i kilkaset metrów wysokości). Próbka 10 lat oznacza, że pojedynczy nietypowy rok mocno wpływa na średnie. To nie prognoza na 2026 rok, a jedynie historyczny punkt odniesienia — status pogody i przełęczy należy sprawdzić ponownie tuż przed wyjazdem.
+      </div>
+    </div>
   </div>
 </section>
 
