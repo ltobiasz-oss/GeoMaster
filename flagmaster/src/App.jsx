@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useQuiz } from "./hooks/useQuiz";
-import ContinentSelectScreen from "./components/ContinentSelectScreen";
 import ModeSelectScreen from "./components/ModeSelectScreen";
+import ContinentSelectScreen from "./components/ContinentSelectScreen";
 import QuizScreen from "./components/QuizScreen";
 import ResultScreen from "./components/ResultScreen";
 import countriesData from "./data/countries.json";
@@ -28,21 +28,18 @@ export default function App() {
 
   if (quiz.screen === "home") {
     return (
-      <ContinentSelectScreen
-        onSelectContinent={quiz.selectContinent}
-        countries={quiz.countries}
+      <ModeSelectScreen
+        onSelectMode={quiz.startQuiz}
+        totalCountries={quiz.countries.length}
       />
     );
   }
 
-  if (quiz.screen === "mode") {
-    const count = quiz.continent
-      ? quiz.countries.filter((c) => c.region === quiz.continent).length
-      : quiz.countries.length;
+  if (quiz.screen === "continent") {
     return (
-      <ModeSelectScreen
-        onSelectMode={quiz.startQuiz}
-        totalCountries={count}
+      <ContinentSelectScreen
+        onSelectContinent={quiz.selectContinent}
+        countries={quiz.countries}
       />
     );
   }

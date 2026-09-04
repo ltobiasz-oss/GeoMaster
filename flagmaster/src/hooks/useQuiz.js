@@ -4,11 +4,11 @@ import { buildQuizQuestions, buildCapitalQuestions, getFeedbackMessage } from ".
 const TOTAL_QUESTIONS = 10;
 
 const initialState = {
-  screen: "home", // 'home' | 'mode' | 'quiz' | 'results'
+  screen: "home", // 'home' | 'continent' | 'quiz' | 'results'
   countries: [],
   loading: true,
   error: null,
-  continent: null, // null = all, or region string
+  continent: null,
   mode: null, // 'flags' | 'capitals'
   questions: [],
   currentIndex: 0,
@@ -17,7 +17,6 @@ const initialState = {
   selectedAnswer: null,
   feedback: null,
   disabledAnswers: [],
-  // null = not transitioning, number = delay in ms
   transitionDelay: null,
   results: [],
 };
@@ -25,8 +24,6 @@ const initialState = {
 export function useQuiz() {
   const [state, setState] = useState(initialState);
 
-  // Handle auto-advance in a useEffect so the setTimeout is never
-  // registered inside a setState updater (which React StrictMode calls twice).
   useEffect(() => {
     if (state.transitionDelay === null) return;
 
@@ -59,23 +56,23 @@ export function useQuiz() {
     setState((s) => ({ ...s, error, loading: false }));
   }, []);
 
-  const selectContinent = useCallback((continent) => {
-    setState((s) => ({ ...s, continent, screen: "mode" }));
+  const startQuiz = useCallback((mode = "flags") => {
+    setState((s) => ({ ...s, mode, screen: "continent" }));
   }, []);
 
-  const startQuiz = useCallback((mode = "flags") => {
+  const selectContinent = useCallback((continent) => {
     setState((s) => {
-      const pool = s.continent
-        ? s.countries.filter((c) => c.region === s.continent)
+      const pool = continent
+        ? s.countries.filter((c) => c.region === continent)
         : s.countries;
       const questions =
-        mode === "capitals"
+        s.mode === "capitals"
           ? buildCapitalQuestions(pool)
           : buildQuizQuestions(pool);
       return {
         ...s,
+        continent,
         screen: "quiz",
-        mode,
         questions,
         currentIndex: 0,
         score: 0,
@@ -97,11 +94,7 @@ export function useQuiz() {
       const isCorrect = cca2 === question.correct.cca2;
       const attempt = s.attempt;
 
-      const message = getFeedbackMessage(
-        attempt,
-        isCorrect,
-        question.correct.name.common
-      );
+      const message = getFeedbackMessage(attempt, isCorrect, question.correct.name.common);
       const feedbackType = isCorrect ? "success" : attempt === 2 ? "info" : "error";
       const feedbackCountry = !isCorrect && attempt === 2 ? question.correct.name.common : null;
 
@@ -111,25 +104,18 @@ export function useQuiz() {
 
       const shouldTransition = isCorrect || attempt === 2;
       const delay = shouldTransition
-        ? attempt === 2 && !isCorrect
-          ? 2000
-          : 1200
+        ? attempt === 2 && !isCorrect ? 2000 : 1200
         : null;
 
-      const newResults =
-        shouldTransition
-          ? [
-              ...s.results,
-              {
-                question,
-                result: isCorrect
-                  ? attempt === 1
-                    ? "first"
-                    : "second"
-                  : "miss",
-              },
-            ]
-          : s.results;
+      const newResults = shouldTransition
+        ? [
+            ...s.results,
+            {
+              question,
+              result: isCorrect ? (attempt === 1 ? "first" : "second") : "miss",
+            },
+          ]
+        : s.results;
 
       return {
         ...s,
@@ -164,8 +150,8 @@ export function useQuiz() {
     totalQuestions: TOTAL_QUESTIONS,
     setCountries,
     setError,
-    selectContinent,
     startQuiz,
+    selectContinent,
     selectAnswer,
     retryFetch,
     goHome,
