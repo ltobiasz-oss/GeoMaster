@@ -5,6 +5,13 @@ import BoardResult from "./BoardResult";
 
 const ROUND_SIZE = 10;
 
+// Pule przechodzone cyklicznie, żeby dwa znaczki obok siebie nigdy nie
+// powtórzyły tego samego słowa.
+const GOOD_WORDS = ["Dobrze!", "Świetnie!", "Brawo!", "Super!"];
+const BAD_WORDS = ["Ups!", "Źle", "Niestety", "Pudło"];
+// Rozłączna z GOOD_WORDS, żeby stempel nie powtarzał słowa z wstążki pod nim.
+const SWEEP_WORDS = ["Komplet!", "Mistrz!", "Bezbłędnie!", "Wymiatasz!"];
+
 function pickRound(pool) {
   return [...pool].sort(() => Math.random() - 0.5).slice(0, ROUND_SIZE);
 }
@@ -31,6 +38,23 @@ export default function PassportBoard({ boardId, onFinish, onBack, passThreshold
       GROUPS.map((g) => [g.id, Boolean(picked[g.id]) === country[g.id]])
     );
   }, [checked, picked, country]);
+
+  const allCorrect =
+    checked && GROUPS.every((g) => correctness[g.id]);
+
+  const badges = useMemo(() => {
+    if (!checked || !country) return {};
+    let good = 0;
+    let bad = 0;
+    const out = {};
+    GROUPS.forEach((g) => {
+      const ok = Boolean(picked[g.id]) === country[g.id];
+      out[g.id] = ok
+        ? GOOD_WORDS[(index + good++) % GOOD_WORDS.length]
+        : BAD_WORDS[(index + bad++) % BAD_WORDS.length];
+    });
+    return out;
+  }, [checked, picked, country, index]);
 
   const toggle = (id) => {
     if (checked) return;
@@ -93,16 +117,29 @@ export default function PassportBoard({ boardId, onFinish, onBack, passThreshold
           </div>
         </div>
 
-        <img src={flagUrl(country.cca2)} alt="" className="eu-flag-big" />
+        <div className="eu-flag-wrap">
+          <img src={flagUrl(country.cca2)} alt="" className="eu-flag-big" />
+          {allCorrect && (
+            <span className="eu-stamp">
+              {SWEEP_WORDS[index % SWEEP_WORDS.length]}
+            </span>
+          )}
+        </div>
         <h2 className="eu-country-name">{country.name}</h2>
         <p className="eu-instruction">Zaznacz wszystkie, do których należy:</p>
 
         <div className="eu-toggles">
           {GROUPS.map((g) => {
-            const on = Boolean(picked[g.id]);
-            const state = !checked
-              ? on ? "on" : "off"
-              : correctness[g.id] ? "right" : "wrong";
+            // Przed sprawdzeniem kafelek pokazuje TWÓJ wybór.
+            // Po sprawdzeniu wypełnienie mówi wyłącznie o członkostwie,
+            // a czerwona obwódka wyłącznie o pomyłce — dwa osobne kanały.
+            let state;
+            if (!checked) {
+              state = picked[g.id] ? "on" : "off";
+            } else {
+              state = country[g.id] ? "member" : "nonmember";
+              if (!correctness[g.id]) state += " err";
+            }
             return (
               <button
                 key={g.id}
@@ -113,9 +150,14 @@ export default function PassportBoard({ boardId, onFinish, onBack, passThreshold
                 <GroupIcon id={g.id} emoji={g.icon} />
                 <span className="eu-toggle-label">{g.label}</span>
                 {checked && (
-                  <span className="eu-toggle-mark">
-                    {country[g.id] ? "✓ należy" : "✗ nie należy"}
-                  </span>
+                  <>
+                    <span className={`eu-toggle-mark ${country[g.id] ? "yes" : "no"}`}>
+                      {country[g.id] ? "✓ NALEŻY" : "— NIE NALEŻY"}
+                    </span>
+                    <span className={`eu-ribbon ${correctness[g.id] ? "good" : "bad"}`}>
+                      {badges[g.id]}
+                    </span>
+                  </>
                 )}
               </button>
             );

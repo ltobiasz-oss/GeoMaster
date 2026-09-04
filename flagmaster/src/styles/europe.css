@@ -281,6 +281,7 @@
 }
 
 .eu-toggle {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -301,17 +302,42 @@
   border-color: var(--color-accent);
 }
 
-.eu-toggle.right {
+/* Po sprawdzeniu wypełnienie koduje TYLKO członkostwo… */
+.eu-toggle.member {
   background: var(--color-success-light);
   border-color: var(--color-success);
+  padding-bottom: 30px;
 }
 
-.eu-toggle.wrong {
-  background: var(--color-error-light);
+.eu-toggle.nonmember {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  padding-bottom: 30px;
+}
+
+/* …a czerwień TYLKO Twoją pomyłkę. */
+.eu-toggle.err {
   border-color: var(--color-error);
+  border-width: 3px;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.16);
 }
 
 .eu-toggle:disabled { cursor: default; }
+
+.eu-ribbon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 5px 0;
+  font-size: 11px;
+  font-weight: 900;
+  color: #fff;
+  border-radius: 0 0 8px 8px;
+}
+
+.eu-ribbon.good { background: #16a34a; }
+.eu-ribbon.bad { background: #dc2626; }
 
 .eu-toggle-icon { font-size: 24px; line-height: 1; }
 
@@ -350,9 +376,47 @@
 }
 
 .eu-toggle-mark {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--color-text-secondary);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+.eu-toggle-mark.yes { color: #15803d; }
+.eu-toggle-mark.no { color: #64748b; }
+
+/* Stempel przyznawany wyłącznie za komplet 4/4. */
+.eu-flag-wrap {
+  position: relative;
+  display: inline-block;
+  max-width: 240px;
+  width: 100%;
+}
+
+.eu-stamp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 6px 18px;
+  border: 4px solid #16a34a;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #16a34a;
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  animation: stamp-in 0.42s cubic-bezier(0.2, 1.4, 0.4, 1) forwards;
+}
+
+@keyframes stamp-in {
+  0%   { transform: translate(-50%, -50%) rotate(-11deg) scale(2.6); opacity: 0; }
+  55%  { transform: translate(-50%, -50%) rotate(-11deg) scale(0.9);  opacity: 1; }
+  100% { transform: translate(-50%, -50%) rotate(-11deg) scale(1);    opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eu-stamp { animation: none; transform: translate(-50%, -50%) rotate(-11deg); }
 }
 
 /* ---- Podpowiedź / werdykt ---- */
