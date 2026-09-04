@@ -1,0 +1,558 @@
+/* ===== Sekcja UE / Schengen / euro / NATO ===== */
+
+.eu-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px 16px 40px;
+}
+
+.eu-card {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  background: var(--color-bg);
+  border-radius: var(--radius-xl);
+  padding: 28px 24px 32px;
+  box-shadow: 0 4px 24px var(--color-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.eu-back {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.eu-back:hover { color: var(--color-accent); }
+
+.eu-logo { font-size: 48px; line-height: 1; }
+
+.eu-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--color-accent);
+  letter-spacing: -0.5px;
+}
+
+.eu-subtitle {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+}
+
+.eu-meter {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--color-accent-light);
+  color: var(--color-accent-dark);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.eu-meter.complete {
+  background: var(--color-success-light);
+  color: #15803d;
+}
+
+/* ---- Lista plansz ---- */
+.eu-boards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.eu-board-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: var(--color-bg-secondary);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--transition), border-color var(--transition),
+              transform var(--transition), box-shadow var(--transition);
+}
+
+.eu-board-btn:hover {
+  background: var(--color-accent-light);
+  border-color: var(--color-accent);
+  box-shadow: 0 2px 12px rgba(59, 130, 246, 0.15);
+}
+
+.eu-board-btn:active { transform: scale(0.98); }
+
+.eu-board-btn.passed {
+  border-color: var(--color-success);
+  background: var(--color-success-light);
+}
+
+.eu-board-btn.fresh { opacity: 0.82; }
+
+.eu-board-icon { font-size: 30px; line-height: 1; flex-shrink: 0; }
+
+.eu-board-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.eu-board-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.eu-check { color: var(--color-success); }
+
+.eu-board-desc {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.eu-board-hint {
+  font-size: 12px;
+  color: #92400e;
+  margin-top: 2px;
+}
+
+/* ---- Pierścień postępu ---- */
+.ring-wrap {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.ring {
+  width: 56px;
+  height: 56px;
+  transform: rotate(-90deg);
+}
+
+.ring-track {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 6;
+}
+
+.ring-fill {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.5s ease;
+}
+
+.ring-fill.passed { stroke: var(--color-success); }
+
+.ring-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* ---- Słabe punkty ---- */
+.eu-weak {
+  width: 100%;
+  padding: 14px;
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+.eu-weak-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.eu-weak-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.eu-weak-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.eu-weak-flag {
+  width: 20px;
+  height: 14px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.eu-weak-name { font-weight: 600; color: var(--color-text); }
+.eu-weak-count { color: var(--color-error); font-weight: 700; font-size: 12px; }
+
+/* ---- Pasek postępu w rundzie ---- */
+.eu-progress {
+  width: 100%;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.eu-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--color-border);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+
+.eu-progress-fill {
+  height: 100%;
+  background: var(--color-accent);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+/* ---- Flagi i nazwy ---- */
+.eu-flag-big {
+  width: 100%;
+  max-width: 240px;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+}
+
+.eu-flag-small {
+  width: 40px;
+  height: 27px;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid var(--color-border);
+}
+
+.eu-country-name {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.eu-instruction {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+/* ---- Cztery przełączniki ---- */
+.eu-toggles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+}
+
+.eu-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 8px;
+  background: var(--color-bg);
+  border: 2.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.eu-toggle.off:hover { border-color: var(--color-accent); }
+
+.eu-toggle.on {
+  background: var(--color-accent-light);
+  border-color: var(--color-accent);
+}
+
+.eu-toggle.right {
+  background: var(--color-success-light);
+  border-color: var(--color-success);
+}
+
+.eu-toggle.wrong {
+  background: var(--color-error-light);
+  border-color: var(--color-error);
+}
+
+.eu-toggle:disabled { cursor: default; }
+
+.eu-toggle-icon { font-size: 24px; line-height: 1; }
+
+.eu-toggle-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.eu-toggle-mark {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+/* ---- Podpowiedź / werdykt ---- */
+.eu-hook {
+  width: 100%;
+  padding: 12px 14px;
+  background: #fefce8;
+  border: 1.5px solid #fde68a;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  line-height: 1.55;
+  color: #854d0e;
+  text-align: left;
+}
+
+.eu-verdict {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  line-height: 1.55;
+  font-weight: 600;
+}
+
+.eu-verdict.ok {
+  background: var(--color-success-light);
+  color: #15803d;
+  border: 1.5px solid #86efac;
+}
+
+.eu-verdict.bad {
+  background: var(--color-error-light);
+  color: #b91c1c;
+  border: 1.5px solid #fca5a5;
+}
+
+.eu-btn-secondary {
+  width: 100%;
+  padding: 12px;
+  background: none;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.eu-btn-secondary:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* ---- Diagram Venna ---- */
+.venn-country {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.venn-diagram {
+  position: relative;
+  width: 100%;
+  height: 170px;
+  margin: 4px 0;
+}
+
+.venn-circle {
+  position: absolute;
+  top: 15px;
+  height: 140px;
+  width: 56%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.venn-circle-a {
+  left: 3%;
+  background: rgba(59, 130, 246, 0.22);
+  border: 2.5px solid var(--color-accent);
+}
+
+.venn-circle-b {
+  right: 3%;
+  background: rgba(34, 197, 94, 0.22);
+  border: 2.5px solid var(--color-success);
+}
+
+.venn-caption {
+  position: absolute;
+  top: -2px;
+  font-size: 13px;
+  font-weight: 800;
+  pointer-events: none;
+}
+
+.venn-caption-a { left: 12%; color: var(--color-accent-dark); }
+.venn-caption-b { right: 12%; color: #15803d; }
+
+.venn-zone {
+  position: absolute;
+  top: 15px;
+  height: 140px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+
+.venn-zone:hover { background: rgba(0, 0, 0, 0.06); }
+
+.venn-zone-a    { left: 4%;  width: 33%; }
+.venn-zone-both { left: 39%; width: 22%; }
+.venn-zone-b    { left: 63%; width: 33%; }
+
+.venn-zone.right {
+  background: rgba(34, 197, 94, 0.45);
+  box-shadow: inset 0 0 0 3px var(--color-success);
+}
+
+.venn-zone.wrong {
+  background: rgba(239, 68, 68, 0.4);
+  box-shadow: inset 0 0 0 3px var(--color-error);
+}
+
+.venn-outside {
+  width: 100%;
+  padding: 13px;
+  background: var(--color-bg-secondary);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.venn-outside:hover { border-color: var(--color-accent); color: var(--color-accent); }
+
+.venn-outside.right {
+  background: var(--color-success-light);
+  border-color: var(--color-success);
+  border-style: solid;
+  color: #15803d;
+}
+
+.venn-outside.wrong {
+  background: var(--color-error-light);
+  border-color: var(--color-error);
+  border-style: solid;
+  color: #b91c1c;
+}
+
+/* ---- Kontrola graniczna ---- */
+.border-trip {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.border-arrow { font-size: 22px; color: var(--color-accent); }
+
+.border-scenario {
+  font-size: 17px;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.border-q {
+  width: 100%;
+  padding: 14px;
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.border-q-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.border-q-btns { display: flex; gap: 10px; }
+
+.border-btn {
+  flex: 1;
+  padding: 12px;
+  background: var(--color-bg);
+  border: 2.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.border-btn:hover { border-color: var(--color-accent); }
+
+.border-btn.selected {
+  background: var(--color-accent-light);
+  border-color: var(--color-accent);
+  color: var(--color-accent-dark);
+}
+
+.border-btn.right {
+  background: var(--color-success-light);
+  border-color: var(--color-success);
+  color: #15803d;
+}
+
+.border-btn.wrong {
+  background: var(--color-error-light);
+  border-color: var(--color-error);
+  color: #b91c1c;
+}
+
+@media (min-width: 480px) {
+  .eu-card { padding: 32px 32px 36px; }
+  .eu-toggles { grid-template-columns: repeat(4, 1fr); }
+  .venn-diagram { height: 190px; }
+  .venn-circle, .venn-zone { height: 160px; }
+}

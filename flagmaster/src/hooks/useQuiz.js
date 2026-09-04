@@ -4,11 +4,12 @@ import { buildQuizQuestions, buildCapitalQuestions, getFeedbackMessage } from ".
 const TOTAL_QUESTIONS = 10;
 
 const initialState = {
-  screen: "home", // 'home' | 'continent' | 'quiz' | 'results'
+  screen: "home", // 'home' | 'continent' | 'quiz' | 'results' | 'europe' | 'europe-board'
   countries: [],
   loading: true,
   error: null,
   continent: null,
+  europeBoard: null, // 'passport' | 'venn' | 'border' | 'traps'
   mode: null, // 'flags' | 'capitals'
   questions: [],
   currentIndex: 0,
@@ -58,6 +59,14 @@ export function useQuiz() {
 
   const startQuiz = useCallback((mode = "flags") => {
     setState((s) => ({ ...s, mode, screen: "continent" }));
+  }, []);
+
+  const startEurope = useCallback(() => {
+    setState((s) => ({ ...s, screen: "europe", europeBoard: null }));
+  }, []);
+
+  const openBoard = useCallback((europeBoard) => {
+    setState((s) => ({ ...s, screen: "europe-board", europeBoard }));
   }, []);
 
   const selectContinent = useCallback((continent) => {
@@ -138,7 +147,13 @@ export function useQuiz() {
   }, []);
 
   const goHome = useCallback(() => {
-    setState((s) => ({ ...s, screen: "home", mode: null, continent: null }));
+    setState((s) => ({
+      ...s,
+      screen: "home",
+      mode: null,
+      continent: null,
+      europeBoard: null,
+    }));
   }, []);
 
   const currentQuestion = state.questions[state.currentIndex] ?? null;
@@ -151,6 +166,8 @@ export function useQuiz() {
     setCountries,
     setError,
     startQuiz,
+    startEurope,
+    openBoard,
     selectContinent,
     selectAnswer,
     retryFetch,

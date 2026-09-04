@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { getRating } from "../utils/quizHelpers";
 
 const BADGE_LABELS = {
@@ -9,19 +8,19 @@ const BADGE_LABELS = {
 
 const CONFETTI_COLORS = ["#e63946", "#ffffff", "#f1c40f", "#2ecc71", "#3498db", "#9b59b6", "#e67e22"];
 
+// Rozrzut losowany raz, przy ładowaniu modułu — render zostaje czysty,
+// a 120 kawałków w stałych pozycjach wygląda identycznie jak losowane za każdym razem.
+const CONFETTI_PIECES = Array.from({ length: 120 }, (_, i) => ({
+  id: i,
+  color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+  left: `${Math.random() * 100}%`,
+  delay: `${Math.random() * 2.5}s`,
+  duration: `${2.5 + Math.random() * 2.5}s`,
+  size: `${6 + Math.random() * 8}px`,
+}));
+
 function Confetti() {
-  const pieces = useMemo(
-    () =>
-      Array.from({ length: 120 }, (_, i) => ({
-        id: i,
-        color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
-        left: `${Math.random() * 100}%`,
-        delay: `${Math.random() * 2.5}s`,
-        duration: `${2.5 + Math.random() * 2.5}s`,
-        size: `${6 + Math.random() * 8}px`,
-      })),
-    []
-  );
+  const pieces = CONFETTI_PIECES;
 
   return (
     <div className="confetti-container">

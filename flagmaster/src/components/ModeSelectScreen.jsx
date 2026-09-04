@@ -1,4 +1,4 @@
-export default function ModeSelectScreen({ onSelectMode, totalCountries }) {
+export default function ModeSelectScreen({ onSelectMode, onSelectEurope, totalCountries }) {
   return (
     <div className="mode-screen">
       <div className="mode-card">
@@ -43,6 +43,14 @@ export default function ModeSelectScreen({ onSelectMode, totalCountries }) {
             <span className="mode-btn-text">
               <span className="mode-btn-label">Capital Quiz</span>
               <span className="mode-btn-sub">Match capitals to countries</span>
+            </span>
+          </button>
+
+          <button className="mode-btn mode-btn-europe" onClick={onSelectEurope}>
+            <span className="mode-btn-icon">🇪🇺</span>
+            <span className="mode-btn-text">
+              <span className="mode-btn-label">Przygotowanie do testu</span>
+              <span className="mode-btn-sub">UE · Schengen · euro · NATO</span>
             </span>
           </button>
         </div>
