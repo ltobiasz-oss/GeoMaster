@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { COUNTRIES, GROUPS, traps, flagUrl } from "../../data/memberships";
+import { GroupIcon } from "./GroupIcons";
 import BoardResult from "./BoardResult";
 
 const ROUND_SIZE = 10;
@@ -109,7 +110,7 @@ export default function PassportBoard({ boardId, onFinish, onBack, passThreshold
                 onClick={() => toggle(g.id)}
                 disabled={checked}
               >
-                <span className="eu-toggle-icon">{g.icon}</span>
+                <GroupIcon id={g.id} emoji={g.icon} />
                 <span className="eu-toggle-label">{g.label}</span>
                 {checked && (
                   <span className="eu-toggle-mark">

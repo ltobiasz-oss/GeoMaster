@@ -1,3 +1,5 @@
+import { EuFlag, PolishFlag } from "./europe/GroupIcons";
+
 export default function ModeSelectScreen({ onSelectMode, onSelectEurope, totalCountries }) {
   return (
     <div className="mode-screen">
@@ -28,7 +30,7 @@ export default function ModeSelectScreen({ onSelectMode, onSelectEurope, totalCo
             className="mode-btn"
             onClick={() => onSelectMode("flags")}
           >
-            <span className="mode-btn-icon">🇵🇱</span>
+            <span className="mode-btn-icon"><PolishFlag className="mode-flag" /></span>
             <span className="mode-btn-text">
               <span className="mode-btn-label">Flag Quiz</span>
               <span className="mode-btn-sub">Identify country flags</span>
@@ -47,7 +49,7 @@ export default function ModeSelectScreen({ onSelectMode, onSelectEurope, totalCo
           </button>
 
           <button className="mode-btn mode-btn-europe" onClick={onSelectEurope}>
-            <span className="mode-btn-icon">🇪🇺</span>
+            <span className="mode-btn-icon"><EuFlag className="mode-flag" /></span>
             <span className="mode-btn-text">
               <span className="mode-btn-label">Przygotowanie do testu</span>
               <span className="mode-btn-sub">UE · Schengen · euro · NATO</span>

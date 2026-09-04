@@ -1,4 +1,5 @@
 import { getCountry, flagUrl } from "../../data/memberships";
+import { EuFlag } from "./GroupIcons";
 
 const BOARDS = [
   {
@@ -70,7 +71,7 @@ export default function EuropeDashboard({
       <div className="eu-card">
         <button className="eu-back" onClick={onBack}>← Menu</button>
 
-        <div className="eu-logo">🇪🇺</div>
+        <EuFlag className="eu-logo-flag" />
         <h1 className="eu-title">Gotowy na test?</h1>
         <p className="eu-subtitle">
           UE · Schengen · strefa euro · NATO
