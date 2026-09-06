@@ -122,6 +122,10 @@ export default function VennBoard({ onFinish, onBack, passThreshold }) {
           <span className="eu-country-name">{country.name}</span>
         </div>
         <p className="eu-instruction">Gdzie należy umieścić ten kraj?</p>
+        <p className="venn-howto">
+          👇 Kliknij w odpowiednie miejsce na kołach — albo w przycisk pod
+          diagramem, jeśli kraj nie należy do żadnego.
+        </p>
 
         <div className="venn-diagram">
           <div className="venn-circle venn-circle-a" />
