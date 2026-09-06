@@ -4,10 +4,12 @@ import BoardResult from "./BoardResult";
 
 const ROUND_SIZE = 10;
 
+// NATO w dwóch parach z czterech — wcześniej pojawiało się tu zbyt rzadko.
 const PAIRS = [
   { a: "eu", b: "schengen" },
   { a: "eu", b: "euro" },
   { a: "eu", b: "nato" },
+  { a: "schengen", b: "nato" },
 ];
 
 const label = (id) => GROUPS.find((g) => g.id === id).label;
@@ -43,6 +45,7 @@ export default function VennBoard({ onFinish, onBack, passThreshold }) {
   const [answer, setAnswer] = useState(null);
   const [correct, setCorrect] = useState(0);
   const [wrongCodes, setWrongCodes] = useState([]);
+  const [rightCodes, setRightCodes] = useState([]);
   const [finalPercent, setFinalPercent] = useState(null);
 
   const country = countries[index];
@@ -51,15 +54,19 @@ export default function VennBoard({ onFinish, onBack, passThreshold }) {
   const choose = (zone) => {
     if (answer) return;
     setAnswer(zone);
-    if (zone === truth) setCorrect((c) => c + 1);
-    else setWrongCodes((w) => [...w, country.cca2]);
+    if (zone === truth) {
+      setCorrect((c) => c + 1);
+      setRightCodes((r) => [...r, country.cca2]);
+    } else {
+      setWrongCodes((w) => [...w, country.cca2]);
+    }
   };
 
   const next = () => {
     if (index + 1 >= countries.length) {
       const percent = Math.round((correct / countries.length) * 100);
       setFinalPercent(percent);
-      onFinish(percent, wrongCodes);
+      onFinish(percent, wrongCodes, rightCodes);
       return;
     }
     setIndex((i) => i + 1);
@@ -72,6 +79,7 @@ export default function VennBoard({ onFinish, onBack, passThreshold }) {
     setAnswer(null);
     setCorrect(0);
     setWrongCodes([]);
+    setRightCodes([]);
     setFinalPercent(null);
   };
 
@@ -125,17 +133,23 @@ export default function VennBoard({ onFinish, onBack, passThreshold }) {
             className={`venn-zone venn-zone-a ${zoneClass("a")}`}
             onClick={() => choose("a")}
             aria-label={`Tylko ${label(pair.a)}`}
-          />
+          >
+            <span className="venn-zone-hint">tylko<br />{label(pair.a)}</span>
+          </button>
           <button
             className={`venn-zone venn-zone-both ${zoneClass("both")}`}
             onClick={() => choose("both")}
             aria-label="Oba"
-          />
+          >
+            <span className="venn-zone-hint">oba</span>
+          </button>
           <button
             className={`venn-zone venn-zone-b ${zoneClass("b")}`}
             onClick={() => choose("b")}
             aria-label={`Tylko ${label(pair.b)}`}
-          />
+          >
+            <span className="venn-zone-hint">tylko<br />{label(pair.b)}</span>
+          </button>
         </div>
 
         <button

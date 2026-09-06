@@ -1,6 +1,6 @@
 import { EuFlag, PolishFlag } from "./europe/GroupIcons";
 
-export default function ModeSelectScreen({ onSelectMode, onSelectEurope, totalCountries }) {
+export default function ModeSelectScreen({ onSelectMode, onSelectEurope }) {
   return (
     <div className="mode-screen">
       <div className="mode-card">
@@ -9,21 +9,6 @@ export default function ModeSelectScreen({ onSelectMode, onSelectEurope, totalCo
         <p className="mode-subtitle">
           Test your world geography knowledge. Choose a quiz mode to get started!
         </p>
-
-        <div className="home-stats">
-          <div className="stat-item">
-            <span className="stat-number">{totalCountries}</span>
-            <span className="stat-label">Countries</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-number">10</span>
-            <span className="stat-label">Questions</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-number">2</span>
-            <span className="stat-label">Chances</span>
-          </div>
-        </div>
 
         <div className="mode-buttons">
           <button
@@ -51,7 +36,7 @@ export default function ModeSelectScreen({ onSelectMode, onSelectEurope, totalCo
           <button className="mode-btn mode-btn-europe" onClick={onSelectEurope}>
             <span className="mode-btn-icon"><EuFlag className="mode-flag" /></span>
             <span className="mode-btn-text">
-              <span className="mode-btn-label">Przygotowanie do testu</span>
+              <span className="mode-btn-label">Sojusze i wspólnoty</span>
               <span className="mode-btn-sub">UE · Schengen · euro · NATO</span>
             </span>
           </button>

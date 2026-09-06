@@ -1,6 +1,7 @@
 import { getCountry, flagUrl } from "../../data/memberships";
 import { EuFlag } from "./GroupIcons";
 
+// Kolejność celowa: fakty → praktyka → relacje między zbiorami → szlif.
 const BOARDS = [
   {
     id: "passport",
@@ -10,13 +11,6 @@ const BOARDS = [
     hint: null,
   },
   {
-    id: "venn",
-    title: "Diagram Venna",
-    icon: "⭕",
-    desc: "Ułóż flagi w nachodzących kołach",
-    hint: "Łatwiej po ~60% w Paszporcie",
-  },
-  {
     id: "border",
     title: "Kontrola graniczna",
     icon: "🛂",
@@ -24,10 +18,17 @@ const BOARDS = [
     hint: "Łatwiej po ~60% w Paszporcie",
   },
   {
+    id: "venn",
+    title: "Diagram Venna",
+    icon: "⭕",
+    desc: "Ułóż flagi w nachodzących kołach",
+    hint: "Łatwiej po ~60% w Paszporcie",
+  },
+  {
     id: "traps",
     title: "Tryb pułapek",
     icon: "🎯",
-    desc: "Kraje, które łamią schemat",
+    desc: "Kraje mniej oczywiste i łamiące schemat",
     hint: "Zostaw na koniec",
   },
 ];
@@ -58,6 +59,7 @@ function ProgressRing({ percent, passed }) {
 
 export default function EuropeDashboard({
   onOpenBoard,
+  onOpenLearn,
   onBack,
   scoreFor,
   weakSpots,
@@ -72,19 +74,36 @@ export default function EuropeDashboard({
         <button className="eu-back" onClick={onBack}>← Menu</button>
 
         <EuFlag className="eu-logo-flag" />
-        <h1 className="eu-title">Gotowy na test?</h1>
-        <p className="eu-subtitle">
-          UE · Schengen · strefa euro · NATO
-        </p>
+        <h1 className="eu-title">Sojusze i wspólnoty</h1>
+        <p className="eu-subtitle">UE · Schengen · strefa euro · NATO</p>
 
         <div className={`eu-meter ${allDone ? "complete" : ""}`}>
-          {allDone
-            ? "🏆 Wszystkie plansze zaliczone — jesteś gotowy!"
-            : `Zaliczone plansze: ${done} / ${BOARDS.length} · próg ${passThreshold}%`}
+          {allDone ? (
+            "🏆 Wszystkie plansze zaliczone — komplet!"
+          ) : (
+            <>
+              Zaliczone plansze: <strong>{done} z {BOARDS.length}</strong>
+              <span className="eu-meter-rule">
+                Żeby zaliczyć wszystko, każda z {BOARDS.length} plansz musi mieć
+                wynik co najmniej <strong>{passThreshold}%</strong>.
+              </span>
+            </>
+          )}
         </div>
 
+        <button className="eu-learn-btn" onClick={onOpenLearn}>
+          <span className="eu-board-icon">📖</span>
+          <span className="eu-board-text">
+            <span className="eu-board-title">Zanim zaczniesz</span>
+            <span className="eu-board-desc">
+              Co to jest UE, Schengen, euro i NATO — z listami państw
+            </span>
+          </span>
+          <span className="eu-learn-arrow">→</span>
+        </button>
+
         <div className="eu-boards">
-          {BOARDS.map((board) => {
+          {BOARDS.map((board, i) => {
             const score = scoreFor(board.id);
             const passed = (score ?? 0) >= passThreshold;
             const started = score !== null;
@@ -94,6 +113,7 @@ export default function EuropeDashboard({
                 className={`eu-board-btn ${passed ? "passed" : ""} ${started ? "" : "fresh"}`}
                 onClick={() => onOpenBoard(board.id)}
               >
+                <span className="eu-board-num">{i + 1}</span>
                 <span className="eu-board-icon">{board.icon}</span>
                 <span className="eu-board-text">
                   <span className="eu-board-title">
@@ -113,6 +133,9 @@ export default function EuropeDashboard({
         {weakSpots.length > 0 && (
           <div className="eu-weak">
             <p className="eu-weak-title">Twoje słabe punkty</p>
+            <p className="eu-weak-sub">
+              Kraj znika z tej listy, gdy odpowiesz o nim poprawnie.
+            </p>
             <div className="eu-weak-list">
               {weakSpots.map(({ cca2, count }) => {
                 const country = getCountry(cca2);
@@ -121,7 +144,7 @@ export default function EuropeDashboard({
                   <div key={cca2} className="eu-weak-item">
                     <img src={flagUrl(cca2)} alt="" className="eu-weak-flag" />
                     <span className="eu-weak-name">{country.name}</span>
-                    <span className="eu-weak-count">{count}×</span>
+                    {count > 1 && <span className="eu-weak-count">{count}×</span>}
                   </div>
                 );
               })}

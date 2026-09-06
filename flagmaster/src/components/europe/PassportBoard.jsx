@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { COUNTRIES, GROUPS, traps, flagUrl } from "../../data/memberships";
+import { COUNTRIES, GROUPS, trapsPool, pickWeighted, flagUrl } from "../../data/memberships";
 import { GroupIcon } from "./GroupIcons";
 import BoardResult from "./BoardResult";
 
@@ -12,8 +12,12 @@ const BAD_WORDS = ["Ups!", "Źle", "Niestety", "Pudło"];
 // Rozłączna z GOOD_WORDS, żeby stempel nie powtarzał słowa z wstążki pod nim.
 const SWEEP_WORDS = ["Komplet!", "Mistrz!", "Bezbłędnie!", "Wymiatasz!"];
 
-function pickRound(pool) {
-  return [...pool].sort(() => Math.random() - 0.5).slice(0, ROUND_SIZE);
+// Paszport: 80% krajów rozpoznawalnych. Pułapki: odwrotnie — 20%,
+// więc dominują Bałkany, Bałtyk i małe państwa.
+function pickRound(boardId) {
+  return boardId === "traps"
+    ? pickWeighted(trapsPool(), ROUND_SIZE, 0.2)
+    : pickWeighted(COUNTRIES, ROUND_SIZE, 0.8);
 }
 
 /**
@@ -21,13 +25,13 @@ function pickRound(pool) {
  * osobno (0,25 pkt), więc częściowa wiedza też się liczy.
  */
 export default function PassportBoard({ boardId, onFinish, onBack, passThreshold }) {
-  const pool = boardId === "traps" ? traps() : COUNTRIES;
-  const [round, setRound] = useState(() => pickRound(pool));
+  const [round, setRound] = useState(() => pickRound(boardId));
   const [index, setIndex] = useState(0);
   const [picked, setPicked] = useState({});
   const [checked, setChecked] = useState(false);
   const [earned, setEarned] = useState(0);
   const [wrongCodes, setWrongCodes] = useState([]);
+  const [rightCodes, setRightCodes] = useState([]);
   const [finalPercent, setFinalPercent] = useState(null);
 
   const country = round[index];
@@ -64,7 +68,9 @@ export default function PassportBoard({ boardId, onFinish, onBack, passThreshold
   const check = () => {
     const hits = GROUPS.filter((g) => Boolean(picked[g.id]) === country[g.id]).length;
     setEarned((e) => e + hits / GROUPS.length);
+    // Do słabych punktów liczy się tylko komplet — jedna pomyłka to wciąż luka.
     if (hits < GROUPS.length) setWrongCodes((w) => [...w, country.cca2]);
+    else setRightCodes((r) => [...r, country.cca2]);
     setChecked(true);
   };
 
@@ -72,7 +78,7 @@ export default function PassportBoard({ boardId, onFinish, onBack, passThreshold
     if (index + 1 >= round.length) {
       const percent = Math.round((earned / round.length) * 100);
       setFinalPercent(percent);
-      onFinish(percent, wrongCodes);
+      onFinish(percent, wrongCodes, rightCodes);
       return;
     }
     setIndex((i) => i + 1);
@@ -81,12 +87,13 @@ export default function PassportBoard({ boardId, onFinish, onBack, passThreshold
   };
 
   const restart = () => {
-    setRound(pickRound(pool));
+    setRound(pickRound(boardId));
     setIndex(0);
     setPicked({});
     setChecked(false);
     setEarned(0);
     setWrongCodes([]);
+    setRightCodes([]);
     setFinalPercent(null);
   };
 

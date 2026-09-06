@@ -6,6 +6,7 @@ import ContinentSelectScreen from "./components/ContinentSelectScreen";
 import QuizScreen from "./components/QuizScreen";
 import ResultScreen from "./components/ResultScreen";
 import EuropeDashboard from "./components/europe/EuropeDashboard";
+import LearnScreen from "./components/europe/LearnScreen";
 import PassportBoard from "./components/europe/PassportBoard";
 import VennBoard from "./components/europe/VennBoard";
 import BorderBoard from "./components/europe/BorderBoard";
@@ -38,7 +39,6 @@ export default function App() {
       <ModeSelectScreen
         onSelectMode={quiz.startQuiz}
         onSelectEurope={quiz.startEurope}
-        totalCountries={quiz.countries.length}
       />
     );
   }
@@ -56,6 +56,7 @@ export default function App() {
     return (
       <EuropeDashboard
         onOpenBoard={quiz.openBoard}
+        onOpenLearn={() => quiz.openBoard("learn")}
         onBack={quiz.goHome}
         scoreFor={europe.scoreFor}
         weakSpots={europe.weakSpots}
@@ -65,9 +66,18 @@ export default function App() {
   }
 
   if (quiz.screen === "europe-board") {
+    if (quiz.europeBoard === "learn") {
+      return (
+        <LearnScreen
+          onBack={quiz.startEurope}
+          onStartBoards={() => quiz.openBoard("passport")}
+        />
+      );
+    }
+
     const shared = {
-      onFinish: (percent, wrong) =>
-        europe.recordScore(quiz.europeBoard, percent, wrong),
+      onFinish: (percent, wrong, right) =>
+        europe.recordScore(quiz.europeBoard, percent, wrong, right),
       onBack: quiz.startEurope,
       passThreshold: europe.PASS_THRESHOLD,
     };

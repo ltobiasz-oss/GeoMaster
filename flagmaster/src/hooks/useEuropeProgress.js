@@ -35,18 +35,28 @@ function write(value) {
 export function useEuropeProgress() {
   const [progress, setProgress] = useState(read);
 
-  const recordScore = useCallback((boardId, percent, wrongCodes = []) => {
-    setProgress((prev) => {
-      const best = Math.max(prev.scores[boardId] ?? 0, Math.round(percent));
-      const mistakes = { ...prev.mistakes };
-      wrongCodes.forEach((code) => {
-        mistakes[code] = (mistakes[code] ?? 0) + 1;
+  const recordScore = useCallback(
+    (boardId, percent, wrongCodes = [], rightCodes = []) => {
+      setProgress((prev) => {
+        const best = Math.max(prev.scores[boardId] ?? 0, Math.round(percent));
+        const mistakes = { ...prev.mistakes };
+
+        // Poprawna odpowiedź zdejmuje kraj z listy słabych punktów…
+        rightCodes.forEach((code) => {
+          delete mistakes[code];
+        });
+        // …a pomyłka go tam (z powrotem) wpisuje.
+        wrongCodes.forEach((code) => {
+          mistakes[code] = (mistakes[code] ?? 0) + 1;
+        });
+
+        const next = { scores: { ...prev.scores, [boardId]: best }, mistakes };
+        write(next);
+        return next;
       });
-      const next = { scores: { ...prev.scores, [boardId]: best }, mistakes };
-      write(next);
-      return next;
-    });
-  }, []);
+    },
+    []
+  );
 
   const reset = useCallback(() => {
     write(emptyProgress);
@@ -57,7 +67,7 @@ export function useEuropeProgress() {
 
   const weakSpots = Object.entries(progress.mistakes)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 6)
+    .slice(0, 8)
     .map(([cca2, count]) => ({ cca2, count }));
 
   return { progress, recordScore, reset, scoreFor, weakSpots, PASS_THRESHOLD };

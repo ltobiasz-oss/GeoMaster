@@ -38,47 +38,54 @@ function buildRound() {
     .slice(0, ROUND_SIZE);
 }
 
+const BLANK = { border: null, euro: null, nato: null };
+const PER_TRIP = 3;
+
 export default function BorderBoard({ onFinish, onBack, passThreshold }) {
   const [round, setRound] = useState(buildRound);
   const [index, setIndex] = useState(0);
-  const [answers, setAnswers] = useState({ border: null, euro: null });
+  const [answers, setAnswers] = useState(BLANK);
   const [checked, setChecked] = useState(false);
   const [correct, setCorrect] = useState(0);
   const [wrongCodes, setWrongCodes] = useState([]);
+  const [rightCodes, setRightCodes] = useState([]);
   const [finalPercent, setFinalPercent] = useState(null);
 
   const dest = round[index];
-  // Polska jest w Schengen, więc kontrola odpada tylko wtedy, gdy cel też jest.
-  const truth = { border: !dest.schengen, euro: dest.euro };
+  // Polska jest w Schengen i w NATO, więc kontrola odpada tylko wtedy,
+  // gdy cel też jest w Schengen, a sojusznikiem jest członek NATO.
+  const truth = { border: !dest.schengen, euro: dest.euro, nato: dest.nato };
 
   const check = () => {
-    let hits = 0;
-    if (answers.border === truth.border) hits += 1;
-    if (answers.euro === truth.euro) hits += 1;
+    const hits = ["border", "euro", "nato"].filter(
+      (k) => answers[k] === truth[k]
+    ).length;
     setCorrect((c) => c + hits);
-    if (hits < 2) setWrongCodes((w) => [...w, dest.cca2]);
+    if (hits < PER_TRIP) setWrongCodes((w) => [...w, dest.cca2]);
+    else setRightCodes((r) => [...r, dest.cca2]);
     setChecked(true);
   };
 
   const next = () => {
     if (index + 1 >= round.length) {
-      const percent = Math.round((correct / (round.length * 2)) * 100);
+      const percent = Math.round((correct / (round.length * PER_TRIP)) * 100);
       setFinalPercent(percent);
-      onFinish(percent, wrongCodes);
+      onFinish(percent, wrongCodes, rightCodes);
       return;
     }
     setIndex((i) => i + 1);
-    setAnswers({ border: null, euro: null });
+    setAnswers(BLANK);
     setChecked(false);
   };
 
   const restart = () => {
     setRound(buildRound());
     setIndex(0);
-    setAnswers({ border: null, euro: null });
+    setAnswers(BLANK);
     setChecked(false);
     setCorrect(0);
     setWrongCodes([]);
+    setRightCodes([]);
     setFinalPercent(null);
   };
 
@@ -139,6 +146,12 @@ export default function BorderBoard({ onFinish, onBack, passThreshold }) {
           onPick={pick}
           btnClass={btnClass}
         />
+        <Question
+          keyName="nato"
+          text="Czy to sojusznik Polski w NATO?"
+          onPick={pick}
+          btnClass={btnClass}
+        />
 
         {checked && (
           <div className="eu-verdict ok">
@@ -149,6 +162,10 @@ export default function BorderBoard({ onFinish, onBack, passThreshold }) {
             {truth.euro
               ? `${dest.name} jest w strefie euro → zapłacisz euro.`
               : `${dest.name} nie jest w strefie euro → potrzebna inna waluta.`}
+            <br />
+            {truth.nato
+              ? `${dest.name} jest w NATO → to sojusznik Polski.`
+              : `${dest.name} nie jest w NATO → to nie sojusznik.`}
           </div>
         )}
 
@@ -162,7 +179,9 @@ export default function BorderBoard({ onFinish, onBack, passThreshold }) {
           <button
             className="btn-primary"
             onClick={check}
-            disabled={answers.border === null || answers.euro === null}
+            disabled={
+              answers.border === null || answers.euro === null || answers.nato === null
+            }
           >
             Sprawdź
           </button>
