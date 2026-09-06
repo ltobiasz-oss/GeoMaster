@@ -67,12 +67,7 @@ export default function App() {
 
   if (quiz.screen === "europe-board") {
     if (quiz.europeBoard === "learn") {
-      return (
-        <LearnScreen
-          onBack={quiz.startEurope}
-          onStartBoards={() => quiz.openBoard("passport")}
-        />
-      );
+      return <LearnScreen onBack={quiz.startEurope} />;
     }
 
     const shared = {

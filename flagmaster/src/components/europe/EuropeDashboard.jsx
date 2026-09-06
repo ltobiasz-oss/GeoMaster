@@ -94,7 +94,7 @@ export default function EuropeDashboard({
         <button className="eu-learn-btn" onClick={onOpenLearn}>
           <span className="eu-board-icon">📖</span>
           <span className="eu-board-text">
-            <span className="eu-board-title">Zanim zaczniesz</span>
+            <span className="eu-board-title">Trochę teorii</span>
             <span className="eu-board-desc">
               Co to jest UE, Schengen, euro i NATO — z listami państw
             </span>

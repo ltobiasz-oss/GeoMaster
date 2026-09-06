@@ -6,7 +6,7 @@ import { GroupIcon } from "./GroupIcons";
  * Część czysto teoretyczna: co to za organizacja, ciekawostka i pełna lista
  * państw z flagami. Karty są zwinięte, żeby nie zasypać dziecka ścianą tekstu.
  */
-export default function LearnScreen({ onBack, onStartBoards }) {
+export default function LearnScreen({ onBack }) {
   const [open, setOpen] = useState("eu");
 
   return (
@@ -15,7 +15,7 @@ export default function LearnScreen({ onBack, onStartBoards }) {
         <button className="eu-back" onClick={onBack}>← Plansze</button>
 
         <div className="eu-logo">📖</div>
-        <h1 className="eu-title">Zanim zaczniesz</h1>
+        <h1 className="eu-title">Trochę teorii</h1>
         <p className="eu-subtitle">
           Cztery organizacje, do których należą państwa Europy. Kliknij, żeby
           rozwinąć.
@@ -62,8 +62,8 @@ export default function LearnScreen({ onBack, onStartBoards }) {
           })}
         </div>
 
-        <button className="btn-primary" onClick={onStartBoards}>
-          Rozumiem — przejdź do ćwiczeń
+        <button className="btn-primary" onClick={onBack}>
+          Wróć do plansz
         </button>
       </div>
     </div>
