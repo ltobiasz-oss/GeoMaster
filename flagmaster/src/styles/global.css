@@ -6,9 +6,10 @@
 }
 
 :root {
-  /* Aplikacja ma własną, jasną paletę — bez tego przeglądarka
-     przyciemnia ją automatycznie i przekłamuje kolory flag. */
-  color-scheme: light;
+  /* Deklaracja obu motywów wyłącza automatyczne przyciemnianie w Chrome
+     na Androidzie. Samo "light" nie wystarczało: przeglądarka uznawała,
+     że strona nie obsługuje ciemnego trybu, i odbarwiała flagi. */
+  color-scheme: light dark;
   --color-bg: #ffffff;
   --color-bg-secondary: #f8faff;
   --color-accent: #3B82F6;
@@ -28,6 +29,71 @@
   --radius-xl: 24px;
   --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   --transition: 150ms ease;
+
+  /* Kolory stanów — osobne tokeny, żeby motyw ciemny mógł je nadpisać. */
+  --c-ok-text: #15803d;
+  --c-ok-border: #86efac;
+  --c-err-text: #b91c1c;
+  --c-err-border: #fca5a5;
+  --c-info-bg: #eef0ff;
+  --c-info-bg2: #e0e7ff;
+  --c-info-border: #c3c9f7;
+  --c-info-text: #3730a3;
+  --c-info-strong: #4f46e5;
+  --c-info-hover: #6366f1;
+  --c-neutral-bg: #f1f5f9;
+  --c-neutral-border: #cbd5e1;
+  --c-neutral-text: #64748b;
+  --c-good-solid: #16a34a;
+  --c-bad-solid: #dc2626;
+  --c-warn-bg: #fefce8;
+  --c-warn-border: #fde68a;
+  --c-warn-text: #854d0e;
+  --c-warn-strong: #92400e;
+  /* Flagi zawsze na bieli — mają w sobie białe elementy (krzyż Szwajcarii,
+     dolny pas Polski), które na ciemnym tle zlałyby się z kartą. */
+  --c-flag-bed: #ffffff;
+  --venn-blend: multiply;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #171c27;
+    --color-bg-secondary: #0f131c;
+    --color-accent: #60a5fa;
+    --color-accent-dark: #93c5fd;
+    --color-accent-light: #1d2842;
+    --color-success: #34d399;
+    --color-success-light: #11301f;
+    --color-error: #f87171;
+    --color-error-light: #3a1c1c;
+    --color-text: #e9ecf3;
+    --color-text-secondary: #99a3b7;
+    --color-border: #2c3447;
+    --color-shadow: rgba(0, 0, 0, 0.55);
+
+    --c-ok-text: #6ee7a7;
+    --c-ok-border: #2f7a52;
+    --c-err-text: #fca5a5;
+    --c-err-border: #8a4242;
+    --c-info-bg: #1b2142;
+    --c-info-bg2: #232a52;
+    --c-info-border: #3d4783;
+    --c-info-text: #c9cffa;
+    --c-info-strong: #a5b4fc;
+    --c-info-hover: #818cf8;
+    --c-neutral-bg: #1b2231;
+    --c-neutral-border: #3b4559;
+    --c-neutral-text: #9aa6bb;
+    --c-good-solid: #15803d;
+    --c-bad-solid: #b91c1c;
+    --c-warn-bg: #2f2713;
+    --c-warn-border: #5f4c1c;
+    --c-warn-text: #fcd34d;
+    --c-warn-strong: #fbbf24;
+    /* Na ciemnym tle mnożenie zamieniłoby koła Venna w czerń. */
+    --venn-blend: screen;
+  }
 }
 
 html, body, #root {
@@ -273,7 +339,7 @@ body {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: contain;
-  background: #fff;
+  background: var(--c-flag-bed);
   border-radius: var(--radius-sm);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
   border: 1.5px solid var(--color-border);
@@ -297,20 +363,20 @@ body {
 
 .feedback-banner.success {
   background: var(--color-success-light);
-  color: #15803d;
-  border: 1.5px solid #86efac;
+  color: var(--c-ok-text);
+  border: 1.5px solid var(--c-ok-border);
 }
 
 .feedback-banner.error {
   background: var(--color-error-light);
-  color: #b91c1c;
-  border: 1.5px solid #fca5a5;
+  color: var(--c-err-text);
+  border: 1.5px solid var(--c-err-border);
 }
 
 .feedback-banner.info {
-  background: #fefce8;
-  color: #854d0e;
-  border: 1.5px solid #fde68a;
+  background: var(--c-warn-bg);
+  color: var(--c-warn-text);
+  border: 1.5px solid var(--c-warn-border);
 }
 
 .feedback-country-name {
@@ -318,7 +384,7 @@ body {
   margin-top: 6px;
   font-size: 20px;
   font-weight: 700;
-  color: #92400e;
+  color: var(--c-warn-strong);
   animation: pulseCountry 0.7s ease-out forwards;
 }
 
@@ -367,21 +433,21 @@ body {
 .answer-btn.selected-correct {
   background: var(--color-success-light);
   border-color: var(--color-success);
-  color: #15803d;
+  color: var(--c-ok-text);
   font-weight: 600;
 }
 
 .answer-btn.selected-wrong {
   background: var(--color-error-light);
   border-color: var(--color-error);
-  color: #b91c1c;
+  color: var(--c-err-text);
   font-weight: 600;
 }
 
 .answer-btn.show-correct {
   background: var(--color-success-light);
   border-color: var(--color-success);
-  color: #15803d;
+  color: var(--c-ok-text);
   font-weight: 600;
 }
 
@@ -407,7 +473,7 @@ body {
   width: 36px;
   height: 24px;
   object-fit: contain;
-  background: #fff;
+  background: var(--c-flag-bed);
   border-radius: 3px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
@@ -491,7 +557,7 @@ body {
   width: 52px;
   height: 34px;
   object-fit: contain;
-  background: #fff;
+  background: var(--c-flag-bed);
   border-radius: 4px;
   border: 1px solid var(--color-border);
   flex-shrink: 0;
@@ -523,17 +589,17 @@ body {
 
 .result-badge.first {
   background: var(--color-success-light);
-  color: #15803d;
+  color: var(--c-ok-text);
 }
 
 .result-badge.second {
-  background: #fefce8;
-  color: #854d0e;
+  background: var(--c-warn-bg);
+  color: var(--c-warn-text);
 }
 
 .result-badge.miss {
   background: var(--color-error-light);
-  color: #b91c1c;
+  color: var(--c-err-text);
 }
 
 /* ===== Mode Select Screen ===== */

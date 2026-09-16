@@ -35,7 +35,6 @@
   padding: 4px 0;
 }
 
-.eu-back:hover { color: var(--color-accent); }
 
 .eu-logo { font-size: 48px; line-height: 1; }
 
@@ -63,7 +62,7 @@
 
 .eu-meter.complete {
   background: var(--color-success-light);
-  color: #15803d;
+  color: var(--c-ok-text);
 }
 
 /* ---- Lista plansz ---- */
@@ -88,11 +87,6 @@
               transform var(--transition), box-shadow var(--transition);
 }
 
-.eu-board-btn:hover {
-  background: var(--color-accent-light);
-  border-color: var(--color-accent);
-  box-shadow: 0 2px 12px rgba(59, 130, 246, 0.15);
-}
 
 .eu-board-btn:active { transform: scale(0.98); }
 
@@ -128,7 +122,7 @@
 
 .eu-board-hint {
   font-size: 12px;
-  color: #4f46e5;
+  color: var(--c-info-strong);
   margin-top: 2px;
 }
 
@@ -212,7 +206,7 @@
   width: 20px;
   height: 14px;
   object-fit: contain;
-  background: #fff;
+  background: var(--c-flag-bed);
   border-radius: 2px;
 }
 
@@ -249,7 +243,7 @@
   max-width: 240px;
   aspect-ratio: 3 / 2;
   object-fit: contain;
-  background: #fff;
+  background: var(--c-flag-bed);
   border-radius: var(--radius-sm);
   border: 1.5px solid var(--color-border);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
@@ -259,7 +253,7 @@
   width: 40px;
   height: 27px;
   object-fit: contain;
-  background: #fff;
+  background: var(--c-flag-bed);
   border-radius: 3px;
   border: 1px solid var(--color-border);
 }
@@ -298,7 +292,6 @@
   transition: all var(--transition);
 }
 
-.eu-toggle.off:hover { border-color: var(--color-accent); }
 
 .eu-toggle.on {
   background: var(--color-accent-light);
@@ -313,8 +306,8 @@
 }
 
 .eu-toggle.nonmember {
-  background: #f1f5f9;
-  border-color: #cbd5e1;
+  background: var(--c-neutral-bg);
+  border-color: var(--c-neutral-border);
   padding-bottom: 30px;
 }
 
@@ -339,8 +332,8 @@
   border-radius: 0 0 8px 8px;
 }
 
-.eu-ribbon.good { background: #16a34a; }
-.eu-ribbon.bad { background: #dc2626; }
+.eu-ribbon.good { background: var(--c-good-solid); }
+.eu-ribbon.bad { background: var(--c-bad-solid); }
 
 .eu-toggle-icon { font-size: 24px; line-height: 1; }
 
@@ -384,8 +377,8 @@
   letter-spacing: 0.3px;
 }
 
-.eu-toggle-mark.yes { color: #15803d; }
-.eu-toggle-mark.no { color: #64748b; }
+.eu-toggle-mark.yes { color: var(--c-ok-text); }
+.eu-toggle-mark.no { color: var(--c-neutral-text); }
 
 /* Stempel przyznawany wyłącznie za komplet 4/4. */
 .eu-flag-wrap {
@@ -400,10 +393,10 @@
   top: 50%;
   left: 50%;
   padding: 6px 18px;
-  border: 4px solid #16a34a;
+  border: 4px solid var(--c-good-solid);
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.92);
-  color: #16a34a;
+  color: var(--c-good-solid);
   font-size: 26px;
   font-weight: 900;
   letter-spacing: 2px;
@@ -428,12 +421,12 @@
 .eu-hook {
   width: 100%;
   padding: 12px 14px;
-  background: #eef0ff;
-  border: 1.5px solid #c3c9f7;
+  background: var(--c-info-bg);
+  border: 1.5px solid var(--c-info-border);
   border-radius: var(--radius-md);
   font-size: 14px;
   line-height: 1.55;
-  color: #3730a3;
+  color: var(--c-info-text);
   text-align: left;
 }
 
@@ -448,14 +441,14 @@
 
 .eu-verdict.ok {
   background: var(--color-success-light);
-  color: #15803d;
-  border: 1.5px solid #86efac;
+  color: var(--c-ok-text);
+  border: 1.5px solid var(--c-ok-border);
 }
 
 .eu-verdict.bad {
   background: var(--color-error-light);
-  color: #b91c1c;
-  border: 1.5px solid #fca5a5;
+  color: var(--c-err-text);
+  border: 1.5px solid var(--c-err-border);
 }
 
 .eu-btn-secondary {
@@ -472,10 +465,6 @@
   transition: all var(--transition);
 }
 
-.eu-btn-secondary:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
 
 /* ---- Diagram Venna ---- */
 .venn-country {
@@ -489,12 +478,12 @@
 .venn-howto {
   width: 100%;
   padding: 9px 12px;
-  background: #eef0ff;
-  border: 1.5px solid #c3c9f7;
+  background: var(--c-info-bg);
+  border: 1.5px solid var(--c-info-border);
   border-radius: var(--radius-md);
   font-size: 12.5px;
   line-height: 1.5;
-  color: #3730a3;
+  color: var(--c-info-text);
   margin-top: -4px;
 }
 
@@ -514,7 +503,7 @@
   width: 56%;
   border-radius: 50%;
   pointer-events: none;
-  mix-blend-mode: multiply;
+  mix-blend-mode: var(--venn-blend);
   filter: blur(0.2px);
 }
 
@@ -552,7 +541,7 @@
 }
 
 .venn-caption-a { left: 8%; background: var(--color-accent-dark); }
-.venn-caption-b { right: 8%; background: #15803d; }
+.venn-caption-b { right: 8%; background: var(--c-ok-text); }
 
 .venn-zone {
   position: absolute;
@@ -579,10 +568,6 @@
   pointer-events: none;
 }
 
-.venn-zone:hover {
-  background: rgba(255, 255, 255, 0.34);
-  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.7);
-}
 
 .venn-zone-a    { left: 4%;  width: 33%; }
 .venn-zone-both { left: 39%; width: 22%; }
@@ -612,20 +597,19 @@
   transition: all var(--transition);
 }
 
-.venn-outside:hover { border-color: var(--color-accent); color: var(--color-accent); }
 
 .venn-outside.right {
   background: var(--color-success-light);
   border-color: var(--color-success);
   border-style: solid;
-  color: #15803d;
+  color: var(--c-ok-text);
 }
 
 .venn-outside.wrong {
   background: var(--color-error-light);
   border-color: var(--color-error);
   border-style: solid;
-  color: #b91c1c;
+  color: var(--c-err-text);
 }
 
 /* ---- Sekcja teoretyczna ---- */
@@ -635,21 +619,17 @@
   gap: 14px;
   width: 100%;
   padding: 15px 16px;
-  background: linear-gradient(135deg, #eef0ff, #e0e7ff);
-  border: 2px solid #c3c9f7;
+  background: linear-gradient(135deg, var(--c-info-bg), var(--c-info-bg2));
+  border: 2px solid var(--c-info-border);
   border-radius: var(--radius-lg);
   cursor: pointer;
   text-align: left;
   transition: all var(--transition);
 }
 
-.eu-learn-btn:hover {
-  border-color: #6366f1;
-  box-shadow: 0 2px 12px rgba(99, 102, 241, 0.2);
-}
 
 .eu-learn-btn:active { transform: scale(0.98); }
-.eu-learn-arrow { font-size: 20px; color: #4f46e5; font-weight: 700; }
+.eu-learn-arrow { font-size: 20px; color: var(--c-info-strong); font-weight: 700; }
 
 .eu-board-num {
   flex-shrink: 0;
@@ -734,12 +714,12 @@
 
 .learn-fact {
   padding: 11px 13px;
-  background: #eef0ff;
-  border: 1.5px solid #c3c9f7;
+  background: var(--c-info-bg);
+  border: 1.5px solid var(--c-info-border);
   border-radius: var(--radius-md);
   font-size: 13.5px;
   line-height: 1.55;
-  color: #3730a3;
+  color: var(--c-info-text);
 }
 
 .learn-flags {
@@ -764,7 +744,7 @@
   width: 22px;
   height: 15px;
   object-fit: contain;
-  background: #fff;
+  background: var(--c-flag-bed);
   border-radius: 2px;
   border: 1px solid var(--color-border);
   flex-shrink: 0;
@@ -817,7 +797,6 @@
   transition: all var(--transition);
 }
 
-.border-btn:hover { border-color: var(--color-accent); }
 
 .border-btn.selected {
   background: var(--color-accent-light);
@@ -828,13 +807,13 @@
 .border-btn.right {
   background: var(--color-success-light);
   border-color: var(--color-success);
-  color: #15803d;
+  color: var(--c-ok-text);
 }
 
 .border-btn.wrong {
   background: var(--color-error-light);
   border-color: var(--color-error);
-  color: #b91c1c;
+  color: var(--c-err-text);
 }
 
 @media (min-width: 480px) {
@@ -842,4 +821,30 @@
   .eu-toggles { grid-template-columns: repeat(4, 1fr); }
   .venn-diagram { height: 190px; }
   .venn-circle, .venn-zone { height: 160px; }
+}
+
+/* Tylko dla urządzeń ze wskaźnikiem. Na dotyku :hover zostaje po
+   tapnięciu i odznaczony przycisk wygląda dalej na zaznaczony. */
+@media (hover: hover) {
+  .eu-back:hover { color: var(--color-accent); }
+  .eu-board-btn:hover {
+    background: var(--color-accent-light);
+    border-color: var(--color-accent);
+    box-shadow: 0 2px 12px rgba(59, 130, 246, 0.15);
+  }
+  .eu-toggle.off:hover { border-color: var(--color-accent); }
+  .eu-btn-secondary:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+  .venn-zone:hover {
+    background: rgba(255, 255, 255, 0.34);
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.7);
+  }
+  .venn-outside:hover { border-color: var(--color-accent); color: var(--color-accent); }
+  .eu-learn-btn:hover {
+    border-color: var(--c-info-hover);
+    box-shadow: 0 2px 12px rgba(99, 102, 241, 0.2);
+  }
+  .border-btn:hover { border-color: var(--color-accent); }
 }
