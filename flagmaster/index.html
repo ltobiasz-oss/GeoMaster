@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>flagmaster</title>
+    <!-- Bez tej deklaracji Chrome uznaje stronę za "nieprzygotowaną na ciemny
+         motyw" i sam odwraca jej kolory, co psuło barwy flag. -->
+    <meta name="color-scheme" content="light" />
+    <title>GeoMaster</title>
   </head>
   <body>
     <div id="root"></div>

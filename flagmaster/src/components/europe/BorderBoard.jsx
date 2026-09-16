@@ -103,7 +103,8 @@ export default function BorderBoard({ onFinish, onBack, passThreshold }) {
 
   const pick = (key, value) => {
     if (checked) return;
-    setAnswers((a) => ({ ...a, [key]: value }));
+    // Ponowne kliknięcie w zaznaczoną odpowiedź ją cofa.
+    setAnswers((a) => ({ ...a, [key]: a[key] === value ? null : value }));
   };
 
   const btnClass = (key, value) => {

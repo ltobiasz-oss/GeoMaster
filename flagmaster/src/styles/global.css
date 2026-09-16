@@ -6,6 +6,9 @@
 }
 
 :root {
+  /* Aplikacja ma własną, jasną paletę — bez tego przeglądarka
+     przyciemnia ją automatycznie i przekłamuje kolory flag. */
+  color-scheme: light;
   --color-bg: #ffffff;
   --color-bg-secondary: #f8faff;
   --color-accent: #3B82F6;
@@ -269,7 +272,8 @@ body {
 .flag-image {
   width: 100%;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
+  background: #fff;
   border-radius: var(--radius-sm);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
   border: 1.5px solid var(--color-border);
@@ -402,7 +406,8 @@ body {
 .answer-btn__flag {
   width: 36px;
   height: 24px;
-  object-fit: cover;
+  object-fit: contain;
+  background: #fff;
   border-radius: 3px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
@@ -485,7 +490,8 @@ body {
 .result-flag {
   width: 52px;
   height: 34px;
-  object-fit: cover;
+  object-fit: contain;
+  background: #fff;
   border-radius: 4px;
   border: 1px solid var(--color-border);
   flex-shrink: 0;
